@@ -1,5 +1,5 @@
 # 📡 Ecosistema de Bases de Datos & Pipeline Lógico Multi-Motor
-### Plataforma de Evaluación Técnica, Arquitectura de Datos y Certificación Profesional en Telecomunicaciones (Claro Dominicana & INDOTEL)
+### Plataforma de Evaluación Técnica, Arquitectura de Datos y Certificación Profesional en Telecomunicaciones (Caso de Estudio Hipotético & Simulación Técnica)
 
 [![GitHub Pages](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=github)](https://juancitopena.github.io/prueba-tecnica-sql-telecom-multimotor/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2022%20Developer-CC292B?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](https://www.microsoft.com/sql-server)
@@ -9,11 +9,15 @@
 [![UI Design](https://img.shields.io/badge/Design-Neo--Brutalist%2075%25-black?style=for-the-badge)](https://github.com/JUANCITOPENA)
 [![Licence](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
+> [!IMPORTANT]
+> **AVISO LEGAL & DESCARGO DE RESPONSABILIDAD (CASO DE ESTUDIO FICTICIO):**  
+> Este repositorio y su plataforma interactiva constituyen una **simulación técnica, académica e hipotética** diseñada exclusivamente con fines formativos, de divulgación científica y de preparación para evaluaciones técnicas en arquitectura de bases de datos. **No es un desarrollo oficial, no representa, no pertenece ni tiene vinculación legal, laboral, contractual o patrocinio con Claro Dominicana, América Móvil ni con el Instituto Dominicano de las Telecomunicaciones (INDOTEL)**. Todos los datos, RNCs, cédulas, números telefónicos, contratos y penalizaciones son registros sintéticos generados proceduralmente para propósitos didácticos.
+
 ---
 
 ## 🎯 Resumen Ejecutivo
 
-Este proyecto representa una solución integral de **ingeniería de datos, pruebas técnicas para desarrolladores/DBAs senior y entorno de certificación interactiva**. Simula la infraestructura de misión crítica de un operador de telecomunicaciones líder (**Claro Dominicana**) bajo la estricta regulación y auditoría de calidad de servicio del ente regulador (**INDOTEL**).
+Este proyecto representa una solución integral de **ingeniería de datos, pruebas técnicas para desarrolladores/DBAs senior y entorno de certificación interactiva**. Simula la arquitectura de misión crítica de un operador de telecomunicaciones en República Dominicana bajo las normativas regulatorias de calidad de servicio del **INDOTEL**.
 
 A través de una arquitectura desacoplada y una interfaz visual **Neo-Brutalista moderna (ancho 75% centrado)**, la plataforma implementa:
 1. **Pipeline DDL Multi-Motor Completo:** Scripts idénticos y funcionalmente nativos para **Microsoft SQL Server, PostgreSQL, MySQL y Oracle Database**.
@@ -29,7 +33,7 @@ A través de una arquitectura desacoplada y una interfaz visual **Neo-Brutalista
 
 ## 🏗️ Arquitectura del Modelo Relacional
 
-El modelo de datos modela un flujo de operaciones de telecomunicaciones con integridad referencial estricta, restricciones `CHECK`, claves primarias compuestas y campos de auditoría regulatoria:
+El modelo de datos simula un flujo de operaciones de telecomunicaciones con integridad referencial estricta, restricciones `CHECK`, claves primarias compuestas y campos de auditoría regulatoria:
 
 ```mermaid
 erDiagram
@@ -95,7 +99,7 @@ El código fuente respeta una **separación estricta de responsabilidades (Separ
 ```text
 ├── index.html                   # Interfaz de usuario principal (Neo-Brutalism 75% centrado)
 ├── .gitignore                   # Exclusiones seguras de Git
-├── README.md                    # Documentación técnica maestra
+├── README.md                    # Documentación técnica maestra y aviso legal
 ├── STATUS_PROYECTO_ECOSISTEMA_DB.md # Auditoría de estado y registro arquitectónico
 │
 ├── css/                         # Hojas de estilo modulares
@@ -141,7 +145,7 @@ Cada motor cuenta con dos vías de despliegue claramente diferenciadas:
   ```
 * **Vía Docker:**
   ```bash
-  docker run -d --name claro-sqlserver -p 1433:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=ClaroTelecom2026!*" mcr.microsoft.com/mssql/server:2022-latest
+  docker run -d --name telecom-sqlserver -p 1433:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=TelecomSQL2026!*" mcr.microsoft.com/mssql/server:2022-latest
   ```
 
 ### 2. PostgreSQL 16+ & pgAdmin 4
@@ -152,7 +156,7 @@ Cada motor cuenta con dos vías de despliegue claramente diferenciadas:
   *(Nota técnica: El parámetro `--install_runtimes 0` evita colisiones cuando el sistema anfitrión ya cuenta con Microsoft Visual C++ 2022 instalado).*
 * **Vía Docker:**
   ```bash
-  docker run -d --name claro-postgres -p 5432:5432 -e POSTGRES_PASSWORD=ClaroPostgres2026! -e POSTGRES_DB=claro_ops_db postgres:16-alpine
+  docker run -d --name telecom-postgres -p 5432:5432 -e POSTGRES_PASSWORD=TelecomPostgres2026! -e POSTGRES_DB=telecom_ops_db postgres:16-alpine
   ```
 
 ### 3. MySQL 8.0 Community & Workbench
@@ -162,14 +166,14 @@ Cada motor cuenta con dos vías de despliegue claramente diferenciadas:
   ```
 * **Vía Docker:**
   ```bash
-  docker run -d --name claro-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ClaroMySQL2026! -e MYSQL_DATABASE=claro_ops_db mysql:8.0
+  docker run -d --name telecom-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=TelecomMySQL2026! -e MYSQL_DATABASE=telecom_ops_db mysql:8.0
   ```
 
 ### 4. Oracle Database 21c Express Edition (XE)
 * **Descarga Oficial:** Extraer `setup.exe` de Oracle 21c XE y configurar contraseña para los usuarios `SYS` y `SYSTEM` en el puerto `1521`.
 * **Vía Docker:**
   ```bash
-  docker run -d --name claro-oracle -p 1521:1521 -e ORACLE_PASSWORD=ClaroOracle2026! gvenzl/oracle-xe:21-slim
+  docker run -d --name telecom-oracle -p 1521:1521 -e ORACLE_PASSWORD=TelecomOracle2026! gvenzl/oracle-xe:21-slim
   ```
 
 ---
@@ -237,4 +241,4 @@ El examen técnico evalúa el dominio práctico y conceptual del aspirante:
 
 ## 📄 Licencia
 
-Este proyecto se distribuye bajo la licencia **MIT**. Puedes utilizarlo libremente para fines educativos, preparación de entrevistas técnicas o implementación corporativa.
+Este proyecto se distribuye bajo la licencia **MIT**. Puedes utilizarlo libremente para fines educativos, preparación de entrevistas técnicas o investigación académica.

@@ -1,13 +1,19 @@
 # 📋 DOCUMENTO DE STATUS Y AUDITORÍA ARQUITECTÓNICA DEL PROYECTO
-## Ecosistema de Bases de Datos & Pipeline Lógico Multi-Motor (Claro Dominicana & INDOTEL)
+## Ecosistema de Bases de Datos & Pipeline Lógico Multi-Motor (Simulación de Caso Telecom RD)
 
 **Fecha de Auditoría:** 28 de Octubre de 2026  
-**Versión:** `v1.0.0-PRO`  
+**Versión:** `v1.0.1-PRO`  
 **Estado General:** `100% OPERATIVO, DESACOPLADO Y ESTABLE`  
 **Lead Architect:** Ing. Juancito Peña (CEO de DataIADev.com)  
 **Ubicación Local:** `C:\Users\User\Desktop\Ecosistema de Bases de Datos & Pipeline Lógico Multi-Motor`  
 **Repositorio GitHub:** `https://github.com/JUANCITOPENA/prueba-tecnica-sql-telecom-multimotor`  
 **Despliegue GitHub Pages:** `https://juancitopena.github.io/prueba-tecnica-sql-telecom-multimotor/`  
+
+---
+
+> [!IMPORTANT]
+> **AVISO LEGAL & DESCARGO DE RESPONSABILIDAD (CASO DE ESTUDIO FICTICIO):**  
+> Este proyecto y todos sus materiales corresponden a una **simulación técnica, académica e hipotética** diseñada exclusivamente con fines didácticos y de preparación para evaluaciones técnicas en bases de datos. **No es un desarrollo oficial, no representa, no pertenece ni tiene relación laboral, contractual o de patrocinio con Claro Dominicana, América Móvil ni con el Instituto Dominicano de las Telecomunicaciones (INDOTEL)**. Todos los nombres, RNCs, cédulas, teléfonos, contratos y averías son datos sintéticos generados proceduralmente.
 
 ---
 
@@ -32,7 +38,7 @@ El proyecto ha alcanzado la consolidación total de su arquitectura técnica, cu
    - Banco rotativo calibrado de **100 preguntas técnicas**.
    - Temporizador regresivo de 30 minutos.
    - Algoritmo Fisher-Yates para barajar las 4 opciones de cada pregunta dinámicamente en tiempo de ejecución, eliminando patrones fijos de respuesta.
-   - Guño sutil en preguntas correctas (espacio antes del punto final `" ."`) garantizado en el 100% de los reactivos.
+   - Guiño sutil en preguntas correctas (espacio antes del punto final `" ."`) garantizado en el 100% de los reactivos.
 6. **Generador Dinámico de Certificados Profesionales:**
    - Emisión interactiva con cálculo de porcentaje de aprobación ($\ge 80\%$), fecha actual, código QR verificable, sello holográfico premium y firma estilográfica del Ing. Juancito Peña.
    - Exportación dual:
@@ -52,7 +58,7 @@ El proyecto ha alcanzado la consolidación total de su arquitectura técnica, cu
 | :--- | :---: | :--- | :---: |
 | `index.html` | ~195 KB | Estructura semántica HTML5, Bento Grid, modales, certificado y Matrix | ✅ Validado |
 | `.gitignore` | 13 líneas | Exclusión de logs, temporales y copias de seguridad internas | ✅ Validado |
-| `README.md` | ~9 KB | Documentación oficial, badges, arquitectura y guía técnica | ✅ Validado |
+| `README.md` | ~9 KB | Documentación oficial, badges, arquitectura, aviso legal y guía técnica | ✅ Validado |
 | `STATUS_PROYECTO_ECOSISTEMA_DB.md` | Este archivo | Registro arquitectónico, trazabilidad y estado de calidad | ✅ Validado |
 | `css/styles.css` | 14.2 KB | Estilos generales, layout 75%, neobrutalismo, navegación y footer | ✅ Validado |
 | `css/quiz.css` | 2.8 KB | Maquetación del simulador de examen, timer, barra de progreso y badges | ✅ Validado |
@@ -80,12 +86,12 @@ El proyecto ha alcanzado la consolidación total de su arquitectura técnica, cu
 
 ## 3. CHECKLIST DE CONTROL DE CALIDAD (QUALITY GATES)
 
-- [x] **Gate 1 - Arquitectura y Desacoplamiento:** 100% de código CSS, JS y SQL extraído a sus respectivas carpetas sin romper referencias ni ID bindings.
-- [x] **Gate 2 - Integridad Sintáctica:** Todos los archivos JavaScript pasaron verificación formal `node -c` con cero errores léxicos o sintácticos.
-- [x] **Gate 3 - Barajado de Opciones (Fisher-Yates):** Opciones del quiz distribuidas aleatoriamente entre A, B, C y D en cada intento; preservación del guiño técnico (`" ."`) intacto.
-- [x] **Gate 4 - Exportación de Certificado (Paridad PDF / PNG):** PDF exportado a escala 2.5 directo a una sola página A4 horizontal (297x210mm) mediante `html2canvas` + `jsPDF`, sin hojas en blanco ni desbordes.
-- [x] **Gate 5 - Resiliencia de Instaladores Windows:** Inyección del parámetro `--install_runtimes 0` y uso de `Start-Process` apuntando a `Downloads`, eliminando bloqueos de permisos de `System32` y conflictos con Microsoft Visual C++ 2022.
-- [x] **Gate 6 - Aislamiento de Sandbox:** Operaciones restringidas estrictamente a la raíz del proyecto sin alterar archivos del sistema operativo.
+- [x] **Gate 1 - Deslinde Legal & Caso Ficticio:** Eliminación total de cualquier atribución oficial de Claro o relación de empleo en Navbar, cuerpo y pie. Incorporación de avisos legales explícitos de caso de estudio hipotético.
+- [x] **Gate 2 - Arquitectura y Desacoplamiento:** 100% de código CSS, JS y SQL extraído a sus respectivas carpetas sin romper referencias ni ID bindings.
+- [x] **Gate 3 - Integridad Sintáctica:** Todos los archivos JavaScript validados con `node -c` con cero errores léxicos o sintácticos.
+- [x] **Gate 4 - Barajado de Opciones (Fisher-Yates):** Opciones del quiz distribuidas aleatoriamente entre A, B, C y D en cada intento; preservación del guiño técnico (`" ."`) intacto.
+- [x] **Gate 5 - Exportación de Certificado (Paridad PDF / PNG):** PDF exportado a escala 2.5 directo a una sola página A4 horizontal (297x210mm) mediante `html2canvas` + `jsPDF`, sin hojas en blanco ni desbordes.
+- [x] **Gate 6 - Resiliencia de Instaladores Windows:** Inyección del parámetro `--install_runtimes 0` y uso de `Start-Process` apuntando a `Downloads`, eliminando bloqueos de permisos de `System32` y conflictos con Microsoft Visual C++ 2022.
 - [x] **Gate 7 - Despliegue en GitHub Pages:** Repositorio público sincronizado en rama `main` y GitHub Pages activo para consumo web global.
 
 ---
