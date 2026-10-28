@@ -1,0 +1,121 @@
+/**
+ * ====================================================================================================
+ * PROYECTO: MASTERCLASS MULTI-MOTOR & AUDITORÍA INDOTEL (CLARO DOMINICANA)
+ * ARCHIVO: css/quiz.css
+ * DESCRIPCIÓN: Estilos Neobrutalistas para el Simulador Técnico de Examen y Reporte de Notas
+ * AUTOR: ING. JUANCITO PEÑA | CEO DataIADev.com
+ * ====================================================================================================
+ */
+
+/* Contenedor del Quiz */
+.quiz-card {
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px #000000;
+  padding: 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Opciones de respuesta */
+.quiz-opcion-btn {
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.15s ease-in-out;
+  box-shadow: 3px 3px 0px #000000;
+  cursor: pointer;
+  position: relative;
+}
+
+.quiz-opcion-btn:hover:not([disabled]) {
+  background: #F1F5F9;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000000;
+}
+
+.quiz-opcion-letra {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #000000;
+  color: #FFFFFF;
+  font-weight: 800;
+  border-radius: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Estado: Respuesta Correcta (Fondo verde sólido con borde oscuro) */
+.quiz-opcion-correcta {
+  background-color: #10B981 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+.quiz-opcion-correcta .quiz-opcion-letra {
+  background: #FFFFFF !important;
+  color: #065F46 !important;
+}
+
+.quiz-opcion-correcta div {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+/* Estado: Respuesta Errónea (Texto ROJO explícito según instrucción) */
+.quiz-opcion-erronea {
+  background-color: #FEE2E2 !important;
+  border: 2px solid #EF4444 !important;
+  color: #DC2626 !important;
+}
+
+.quiz-opcion-erronea div {
+  color: #DC2626 !important;
+  font-weight: 800 !important;
+}
+
+.quiz-opcion-erronea .quiz-opcion-letra {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+}
+
+/* Barra de progreso y temporizador */
+.quiz-timer-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 800;
+  padding: 8px 16px;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+.badge-soft-dark {
+  background: #1E293B;
+  color: #38BDF8;
+}
+
+@keyframes pulseRed {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-pulse {
+  animation: pulseRed 1s infinite ease-in-out;
+}
+
+/* Métricas en vivo */
+.metric-box-quiz {
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 3px 3px 0px #000000;
+  background: #FFFFFF;
+}

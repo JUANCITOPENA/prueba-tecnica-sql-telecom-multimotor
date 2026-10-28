@@ -1,0 +1,13 @@
+# Dependencias y temporales
+node_modules/
+.npm/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Respaldos internos
+.backup/
+*.patch

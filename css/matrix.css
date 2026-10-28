@@ -1,0 +1,134 @@
+/**
+ * ====================================================================================================
+ * PROYECTO: MASTERCLASS MULTI-MOTOR & AUDITORÍA INDOTEL (CLARO DOMINICANA)
+ * ARCHIVO: css/matrix.css
+ * DESCRIPCIÓN: Estilos para el Fondo Matrix Digital Rain y la Terminal del Manifiesto Inspiracional
+ * AUTOR: ING. JUANCITO PEÑA | CEO DataIADev.com
+ * ====================================================================================================
+ */
+
+.matrix-terminal-section {
+  position: relative;
+  background: #0A0F14;
+  border: 3px solid #000000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 8px 8px 0px #000000;
+  margin-bottom: 3.5rem;
+  min-height: 520px;
+}
+
+#matrix-rain-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.matrix-terminal-content {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem;
+  background: rgba(10, 15, 20, 0.88);
+}
+
+.matrix-terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #22C55E;
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.matrix-terminal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.matrix-terminal-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid #000000;
+}
+
+.dot-red { background: #EF4444; }
+.dot-yellow { background: #F59E0B; }
+.dot-green { background: #10B981; }
+
+.matrix-typed-box {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #4ADE80;
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-shadow: 0 0 6px rgba(74, 222, 128, 0.4);
+}
+
+.matrix-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background: #22C55E;
+  vertical-align: middle;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 10 Consejos Tips Cards */
+.tip-card-pro {
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0px #000000;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+
+.tip-card-pro:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.keyword-highlight-blue {
+  color: #0284C7;
+  font-weight: 800;
+  background: #E0F2FE;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.keyword-highlight-red {
+  color: #DA291C;
+  font-weight: 800;
+  background: #FEE2E2;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.keyword-highlight-green {
+  color: #15803D;
+  font-weight: 800;
+  background: #DCFCE7;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.keyword-highlight-purple {
+  color: #7E22CE;
+  font-weight: 800;
+  background: #F3E8FF;
+  padding: 2px 6px;
+  border-radius: 4px;
+}

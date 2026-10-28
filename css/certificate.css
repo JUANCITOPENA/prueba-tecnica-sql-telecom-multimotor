@@ -1,0 +1,143 @@
+/**
+ * ====================================================================================================
+ * PROYECTO: MASTERCLASS MULTI-MOTOR & AUDITORÍA INDOTEL (CLARO DOMINICANA)
+ * ARCHIVO: css/certificate.css
+ * DESCRIPCIÓN: Estilos de Acreditación Oficial, Certificado Premium y Firma Caligráfica Azul
+ * AUTOR: ING. JUANCITO PEÑA | CEO DataIADev.com
+ * ====================================================================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cinzel:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap');
+
+.certificate-document-wrapper {
+  background: #FFFFFF;
+  border: 4px double #1E293B;
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  color: #0F172A;
+  min-height: 600px;
+}
+
+/* Marca de agua sutil de fondo */
+.certificate-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 6.5rem;
+  font-weight: 900;
+  color: rgba(2, 132, 199, 0.035);
+  pointer-events: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+  z-index: 0;
+}
+
+/* Borde perimetral ceremonial interior */
+.certificate-inner-border {
+  border: 2px solid #DA291C;
+  border-radius: 8px;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  background: radial-gradient(circle at center, #FFFFFF 60%, #F8FAFC 100%);
+}
+
+/* Barra de logos ceremonial: DataIADev + Motores RDBMS */
+.certificate-engines-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px dashed #CBD5E1;
+}
+
+.certificate-sponsor-logo {
+  display: flex;
+  align-items: center;
+}
+
+.cert-dataiadev-logo {
+  height: 48px;
+  width: auto;
+  max-width: 175px;
+  object-fit: contain;
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.12));
+}
+
+.certificate-engines-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.engine-logo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F8FAFC;
+  border: 1.5px solid #000000;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Tipografía de Título de Certificado */
+.certificate-main-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #0F172A;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.certificate-recipient-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 2.25rem;
+  color: #DA291C;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  letter-spacing: -0.01em;
+}
+
+/* Cuadrícula de métricas del examen */
+.certificate-metrics-grid {
+  background: #F1F5F9;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+/* Firma manuscrita en tinta azul */
+.certificate-signature-blue {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #0038A8; /* Tinta azul clásica de lapicero pluma */
+  transform: rotate(-3deg);
+  display: inline-block;
+  line-height: 1.1;
+  text-shadow: 0.5px 0.5px 0px rgba(0, 56, 168, 0.4);
+}
+
+.certificate-seal-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.25));
+}

@@ -1,0 +1,3248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masterclass de Bases de Datos & SQL Multi-Motor | Claro Dominicana</title>
+
+  <!-- Google Fonts: Space Grotesk, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Prism.js Core -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+    <!-- Google Fonts Complementarias: Cinzel & Dancing Script (Firma Digital Oficial) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Librerías de Exportación de Alta Resolución para Certificados -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Hojas de Estilo Desacopladas (Clean Architecture CSS) -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <link rel="stylesheet" href="css/certificate.css">
+  <link rel="stylesheet" href="css/matrix.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       NAVBAR (100% ANCHO REAL)
+  ========================================================================== -->
+  <nav class="navbar navbar-expand-xl navbar-claro fixed-top">
+    <div class="container-fluid px-4 px-lg-5">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
+        <img src="assets/LOGO_DATAIADEV.png" alt="DataIADev Logo" class="navbar-brand-logo me-1" style="height: 38px; width: auto; max-height: 38px; object-fit: contain;">
+        <span class="navbar-brand-badge">CLARO DOMINICANA</span>
+        <span class="fw-bold fs-5 text-dark d-none d-sm-inline">Data Architecture Ops</span>
+      </a>
+
+      <button class="navbar-toggler border-2 border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
+          
+          <!-- Dropdown 1: Arquitectura & Fundamentos -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-diagram-3-fill text-danger me-1"></i> Arquitectura
+            </a>
+            <ul class="dropdown-menu border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 4px 4px 0 #000;">
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#introduccion-datos"><i class="bi bi-info-circle me-2 text-danger"></i>Introducción al Pipeline</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#ecosistema"><i class="bi bi-grid-3x3-gap-fill me-2 text-primary"></i>Top 10 Motores DBMS</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#fundamentos"><i class="bi bi-shield-lock-fill me-2 text-success"></i>Fundamentos & ACID</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2 bg-warning-subtle" href="#manual-instalacion"><i class="bi bi-tools me-2 text-dark"></i>🛠️ Manual Instalación Local</a></li>
+              <li><hr class="dropdown-divider border-dark"></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#pipeline"><i class="bi bi-shuffle me-2 text-danger"></i>Orden Lógico de Ejecución</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#diagrama-er"><i class="bi bi-bezier2 me-2 text-info"></i>Diagrama E-R Telecom</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown 2: Motores & Laboratorio Práctico -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-database-fill-gear text-primary me-1"></i> Laboratorio
+            </a>
+            <ul class="dropdown-menu border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 4px 4px 0 #000;">
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#motores-tabs"><i class="bi bi-file-earmark-code-fill me-2 text-danger"></i>Scripts Multi-Motor (4 DDL/DML)</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#vistas"><i class="bi bi-table me-2 text-primary"></i>Vistas & Auditoría INDOTEL</a></li>
+              
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#carga-masiva-seccion"><i class="bi bi-database-add me-2 text-success"></i>🚀 Data Seeder Masivo (1,000+ TK)</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#laboratorio-consultas"><i class="bi bi-terminal-fill me-2 text-primary"></i>📚 Consultas (15 Básicas + 15 Avanzadas)</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown 3: Evaluación & Certificación -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-award-fill text-warning me-1"></i> Acreditación
+            </a>
+            <ul class="dropdown-menu border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 4px 4px 0 #000;">
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#seccion-quiz"><i class="bi bi-lightning-charge-fill me-2 text-danger"></i>⚡ Examen Técnico (30m)</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#modulo-certificado-oficial"><i class="bi bi-patch-check-fill me-2 text-success"></i>🎓 Certificado Oficial</a></li>
+              <li><hr class="dropdown-divider border-dark"></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#consejos-maestria"><i class="bi bi-lightbulb-fill me-2 text-warning"></i>💡 10 Consejos Pro Senior</a></li>
+              <li><a class="dropdown-item fw-bold text-dark py-2" href="#seccion-manifiesto-matrix"><i class="bi bi-terminal me-2 text-success"></i>💻 Manifiesto Matrix 2026</a></li>
+            </ul>
+          </li>
+
+          <!-- Botón Directo: Descargar SQL -->
+          <li class="nav-item ms-lg-2">
+            <a href="#descargas" class="btn btn-claro btn-sm d-flex align-items-center gap-2">
+              <i class="bi bi-cloud-arrow-down-fill"></i> Descargar SQL
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       CONTENIDO PRINCIPAL: 75% CENTRADO
+  ========================================================================== -->
+  <div class="layout-75-container">
+
+    <!-- HERO -->
+    <header id="inicio" class="py-5 mb-3">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge-soft-red">📡 Telecomunicaciones &amp; Misión Crítica</span>
+            <span class="badge-soft-blue">⚡ SQL Server · Postgres · Oracle · MySQL</span>
+          </div>
+          <h1 class="display-5 fw-extrabold text-heading mb-3">
+            Ecosistema de Bases de Datos &amp; Pipeline Lógico Multi-Motor
+          </h1>
+          <p class="lead mb-4">
+            Aprende cómo el optimizador relacional procesa millones de incidencias en redes de <strong>Fibra Óptica (GPON)</strong>, <strong>Telefonía Móvil 5G</strong> y auditoría ante el <strong>INDOTEL</strong> en la infraestructura de <strong>Claro Dominicana</strong>.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#diagrama-er" class="btn btn-claro btn-lg d-flex align-items-center gap-2">
+              <i class="bi bi-diagram-3-fill"></i> Ver Diagrama E-R
+            </a>
+            <a href="#motores-tabs" class="btn btn-outline-dark btn-lg border-2 fw-bold d-flex align-items-center gap-2">
+              <i class="bi bi-cpu-fill"></i> Probar los 4 Motores
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="p-4 bg-white border border-2 border-dark rounded-4 shadow-sm">
+            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2 text-danger">
+              <i class="bi bi-hdd-network-fill"></i> Caso Telecom: Claro &amp; INDOTEL
+            </h5>
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-broadcast-pin text-danger fs-5 flex-shrink-0"></i>
+                <span><strong>Redes Críticas FTTH &amp; 5G:</strong> Telemetría y monitoreo de averías sobre nodos de fibra óptica GPON (Piantini, Bella Vista, Naco) y celdas 5G en Santiago.</span>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-shield-fill-exclamation text-danger fs-5 flex-shrink-0"></i>
+                <span><strong>Auditoría Regulatoria INDOTEL:</strong> Detección automatizada de violaciones de SLA (>4h en fibra / >6h en móvil) mediante vistas operacionales en tiempo real.</span>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-database-fill-gear text-danger fs-5 flex-shrink-0"></i>
+                <span><strong>Paridad Multi-RDBMS Real:</strong> Scripts completos ejecutables con DDL, restricciones e INSERTs en SQL Server, PostgreSQL, Oracle y MySQL.</span>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-speedometer text-danger fs-5 flex-shrink-0"></i>
+                <span><strong>Tuning &amp; Pipeline Lógico:</strong> Optimización de memoria podando millones de registros en el paso <code>WHERE</code> antes de procesar agrupaciones pesadas.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+
+      </div>
+    </header>
+<!-- =========================================================================
+         NUEVA SECCIÓN: INTRODUCCIÓN A LAS BASES DE DATOS & ROLES DEL DATO
+         (Colocar justo antes de: <section id="ecosistema" class="mb-5">)
+    ========================================================================== -->
+    <section id="introduccion-datos" class="mb-5">
+      <div class="content-card">
+        
+        <!-- Encabezado de Sección -->
+        <div class="text-center mb-4">
+          <span class="badge-soft-blue mb-2 d-inline-block">🌐 Fundamento Universal</span>
+          <h2 class="h2 fw-bold">El Corazón Digital: Introducción a las Bases de Datos &amp; Ecosistema de Roles</h2>
+          <p class="mb-0">
+            En la economía moderna, <strong>el dato no es simplemente un recurso: es el activo más valioso de cualquier organización</strong>. Desde el cobro de una factura en <em>Claro</em> hasta la recomendación de una serie o la autorización de una tarjeta de crédito, nada ocurre sin una base de datos detrás.
+          </p>
+        </div>
+
+        <!-- Banner Conceptual: ¿Qué es realmente una Base de Datos? -->
+        <div class="p-3 bg-light border border-2 border-dark rounded-3 mb-4 shadow-sm">
+          <div class="row align-items-center g-3">
+            <div class="col-md-8">
+              <h5 class="fw-bold mb-1 text-dark">
+                <i class="bi bi-hdd-stack-fill text-danger me-2"></i> ¿Qué es una Base de Datos y por qué importa?
+              </h5>
+              <p class="small mb-0 text-dark">
+                Una <strong>Base de Datos</strong> es un sistema organizado y seguro diseñado para <strong>almacenar, indexar, proteger y recuperar información</strong> a velocidades de milisegundos. Tener millones de registros aislados en hojas de cálculo o archivos de texto produce inconsistencia, pérdida de información y bloqueos. Las bases de datos garantizan <strong>integridad referencial, control de concurrencia y disponibilidad continua</strong> bajo transacciones masivas simultáneas.
+              </p>
+            </div>
+            <div class="col-md-4 text-md-end text-center">
+              <span class="badge bg-dark text-white p-2 d-inline-block" style="font-size: 0.95rem;">
+                <i class="bi bi-shield-check text-warning me-1"></i> Integridad + Rendimiento + Escala
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Los 4 Roles del Ciclo de Vida del Dato -->
+        <h4 class="fw-bold mb-3 mt-4 text-dark">
+          <i class="bi bi-people-fill text-danger me-1"></i> Los 4 Roles Clave en el Ecosistema del Dato
+        </h4>
+        <p class="small mb-3 text-dark">
+          El ciclo de vida de la información requiere diferentes enfoques de ingeniería y negocio. Conoce qué hace cada perfil y cómo interactúa con la base de datos:
+        </p>
+
+        <div class="row g-3 mb-4">
+          
+          <!-- ROL 1: INGENIERO DE DATOS -->
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100 shadow-sm">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="badge bg-danger text-white">1. Infraestructura</span>
+                <i class="bi bi-gear-wide-connected fs-4 text-danger"></i>
+              </div>
+              <h5 class="fw-bold mb-1 text-dark">Ingeniero de Datos</h5>
+              <small class="d-block fw-bold text-danger mb-2"><em>Data Engineer</em></small>
+              <p class="small mb-2 text-dark">
+                <strong>Construye las autopistas por donde viaja la información.</strong> Diseña tuberías de ingestión (<strong>ETL / ELT</strong>), almacena datos en Data Warehouses / Data Lakes y garantiza que el dato esté limpio, seguro y disponible.
+              </p>
+              <div class="p-2 border border-dark rounded-2 bg-light">
+                <small class="d-block fw-bold text-dark">🛠️ Foco Técnico:</small>
+                <small class="text-dark">Modelado físico, índices, particionado, pipelines en streaming y optimización del motor (T-SQL, PL/pgSQL).</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROL 2: ANALISTA DE DATOS -->
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100 shadow-sm">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="badge bg-primary text-white">2. Negocio &amp; BI</span>
+                <i class="bi bi-graph-up-arrow fs-4 text-primary"></i>
+              </div>
+              <h5 class="fw-bold mb-1 text-dark">Analista de Datos</h5>
+              <small class="d-block fw-bold text-primary mb-2"><em>Data Analyst / BI Specialist</em></small>
+              <p class="small mb-2 text-dark">
+                <strong>Traduce números crudos en decisiones de negocio.</strong> Responde a la pregunta: <em>¿Qué pasó y por qué ocurrió?</em> Diseña métricas críticas (KPIs, cumplimiento de SLA) y construye tableros de control ejecutivos.
+              </p>
+              <div class="p-2 border border-dark rounded-2 bg-light">
+                <small class="d-block fw-bold text-dark">📊 Foco Técnico:</small>
+                <small class="text-dark">Consultas analíticas complejas con GROUP BY, HAVING, Window Functions, <strong>Power BI &amp; DAX</strong> y dashboards.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROL 3: CIENTÍFICO DE DATOS -->
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100 shadow-sm">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="badge bg-success text-white">3. Futuro &amp; ML</span>
+                <i class="bi bi-cpu fs-4 text-success"></i>
+              </div>
+              <h5 class="fw-bold mb-1 text-dark">Científico de Datos</h5>
+              <small class="d-block fw-bold text-success mb-2"><em>Data Scientist</em></small>
+              <p class="small mb-2 text-dark">
+                <strong>Anticipa escenarios futuros con modelos estadísticos y Machine Learning.</strong> Responde a: <em>¿Qué va a pasar y qué debemos hacer?</em> Detecta patrones ocultos, fraudes y riesgos antes de que ocurran.
+              </p>
+              <div class="p-2 border border-dark rounded-2 bg-light">
+                <small class="d-block fw-bold text-dark">🧠 Foco Técnico:</small>
+                <small class="text-dark">Extracción con SQL para entrenar algoritmos en <strong>Python</strong> (Scikit-Learn, Pandas) y despliegue de modelos predictivos.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROL 4: DESARROLLADOR DE SOLUCIONES -->
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100 shadow-sm">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="badge bg-warning text-dark">4. Aplicaciones</span>
+                <i class="bi bi-code-square fs-4 text-dark"></i>
+              </div>
+              <h5 class="fw-bold mb-1 text-dark">Desarrollador Software</h5>
+              <small class="d-block fw-bold text-dark mb-2"><em>Solutions / Full Stack Dev</em></small>
+              <p class="small mb-2 text-dark">
+                <strong>Conecta al usuario final con la base de datos a través de software.</strong> Crea interfaces web, móviles y APIs (REST/GraphQL) que ejecutan transacciones continuas (operaciones CRUD) sin comprometer el servidor.
+              </p>
+              <div class="p-2 border border-dark rounded-2 bg-light">
+                <small class="d-block fw-bold text-dark">💻 Foco Técnico:</small>
+                <small class="text-dark">Integración de backend (<strong>C#, Next.js, PHP</strong>), ORMs, control de concurrencia y consultas SQL ultra-eficientes.</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Por qué DEBES dominar este tema -->
+        <div class="p-4 bg-white border border-2 border-dark rounded-3">
+          <h5 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2">
+            <i class="bi bi-patch-question-fill text-danger fs-4"></i> ¿Por qué TODO profesional técnico debe dominar Bases de Datos y SQL?
+          </h5>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-square-fill text-danger fs-5 flex-shrink-0 mt-1"></i>
+                <span class="small text-dark">
+                  <strong>Independencia Tecnológica:</strong> Los frameworks y librerías de moda cambian cada 2 años; <strong>el estándar SQL y los fundamentos relacionales se han mantenido como la base del software por más de 40 años</strong>.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-square-fill text-danger fs-5 flex-shrink-0 mt-1"></i>
+                <span class="small text-dark">
+                  <strong>Prevención de Desastres en Producción:</strong> Una consulta mal estructurada por desconocer el orden lógico de ejecución puede bloquear tablas críticas, colapsar la memoria RAM y derribar la aplicación.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-square-fill text-danger fs-5 flex-shrink-0 mt-1"></i>
+                <span class="small text-dark">
+                  <strong>El Combustible de la Inteligencia Artificial:</strong> Los modelos de Machine Learning y los agentes LLMs no pueden razonar ni predecir nada si no cuentan con <strong>datos limpios, consistentes y bien estructurados</strong> en su origen.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- SECCIÓN 1: TIPOS Y TOP 10 MOTORES -->
+    <section id="ecosistema" class="mb-5">
+      <div class="content-card">
+        <div class="text-center mb-4">
+          <span class="badge-soft-red mb-2 d-inline-block">🏆 Ecosistema Mundial</span>
+          <h2 class="h2 fw-bold">Tipos de Bases de Datos y Top 10 del Mercado</h2>
+          <p>Diferencias arquitectónicas, tecnologías y casos de uso dentro del sector de telecomunicaciones.</p>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <h6 class="fw-bold d-flex align-items-center gap-2 text-primary">
+                <i class="bi bi-table"></i> 1. Relacionales (RDBMS/SQL)
+              </h6>
+              <p class="small mb-0">Estructura tabular estricta, llaves y garantías <strong>ACID</strong> completas. Ideal para facturación y contratos de clientes.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <h6 class="fw-bold d-flex align-items-center gap-2 text-success">
+                <i class="bi bi-braces"></i> 2. NoSQL (Not Only SQL)
+              </h6>
+              <p class="small mb-0">Esquemas dinámicos para escalabilidad masiva: Documental (MongoDB), Memoria/Caché (Redis) y Columnar (Cassandra).</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <h6 class="fw-bold d-flex align-items-center gap-2 text-danger">
+                <i class="bi bi-cloud-check"></i> 3. Cloud Warehouses
+              </h6>
+              <p class="small mb-0">Analítica (OLAP) con cómputo desacoplado del almacenamiento (Snowflake, BigQuery) para reportería de Big Data.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top 10 Grid -->
+        <h4 class="fw-bold mb-3 mt-4">Top 10 Motores Líderes en la Industria</h4>
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" alt="Oracle Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">1. Oracle Database</h5>
+                  <span class="badge bg-danger">RDBMS Enterprise</span>
+                </div>
+                <p class="small mb-1">El estándar de misión crítica bancaria y telecomunicaciones. Destaca por Oracle RAC y particionado masivo.</p>
+                <small><strong>Uso en Claro:</strong> Facturación central recurrente (*Billing Core*).</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">2. MySQL</h5>
+                  <span class="badge bg-primary">RDBMS Web Leader</span>
+                </div>
+                <p class="small mb-1">Motor open-source universal respaldado por Oracle. Motor transaccional InnoDB de alto rendimiento web.</p>
+                <small><strong>Uso en Claro:</strong> Portales de clientes *Mi Claro Web* y servicios de tienda.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">3. Microsoft SQL Server</h5>
+                  <span class="badge bg-dark">RDBMS Enterprise</span>
+                </div>
+                <p class="small mb-1">Ecosistema Microsoft con T-SQL, índices Columnstore para analítica y clusters Always On Availability Groups.</p>
+                <small><strong>Uso en Claro:</strong> Plataforma de helpdesk, averías y órdenes de servicio técnico.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">4. PostgreSQL</h5>
+                  <span class="badge bg-info text-dark">ORDBMS Avanzado</span>
+                </div>
+                <p class="small mb-1">Base relacional-objeto avanzada con soporte nativo de JSONB y geolocalización líder mundial con <strong>PostGIS</strong>.</p>
+                <small><strong>Uso en Claro:</strong> Trazado georreferenciado de cables de fibra y torres celulares.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">5. MongoDB</h5>
+                  <span class="badge bg-success">NoSQL Documental</span>
+                </div>
+                <p class="small mb-1">Almacena documentos BSON sin esquema rígido con sharding nativo y réplicas automáticas.</p>
+                <small><strong>Uso en Claro:</strong> Catálogo de planes y especificaciones de terminales móviles.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">6. Redis</h5>
+                  <span class="badge bg-danger">In-Memory / Cache</span>
+                </div>
+                <p class="small mb-1">Almacén en memoria RAM con latencia menor a un milisegundo para colas y caché de alto tráfico.</p>
+                <small><strong>Uso en Claro:</strong> Manejo de tokens y sesiones masivas en la app *Mi Claro*.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <i class="bi bi-snow2 fs-1 text-primary flex-shrink-0" style="font-size: 47px !important;"></i>
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">7. Snowflake</h5>
+                  <span class="badge bg-primary">Cloud Data Warehouse</span>
+                </div>
+                <p class="small mb-1">Almacén analítico en la nube con escalamiento elástico instantáneo de cómputo y almacenamiento separado.</p>
+                <small><strong>Uso en Claro:</strong> Analítica masiva de consumo de datos y telemetría de red.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite Logo" class="db-logo">
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">8. SQLite</h5>
+                  <span class="badge bg-secondary">Embebida / Local</span>
+                </div>
+                <p class="small mb-1">Motor SQL autónomo y completo en un solo archivo de disco, sin procesos de servidor.</p>
+                <small><strong>Uso en Claro:</strong> Almacenamiento local en routers ONT residenciales y decodificadores.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <i class="bi bi-diagram-2 fs-1 text-dark flex-shrink-0" style="font-size: 47px !important;"></i>
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">9. Apache Cassandra</h5>
+                  <span class="badge bg-dark">NoSQL Columnar</span>
+                </div>
+                <p class="small mb-1">Arquitectura peer-to-peer sin punto único de falla, optimizada para escrituras masivas continuas.</p>
+                <small><strong>Uso en Claro:</strong> CDRs (Call Detail Records) y logs de llamadas por segundo.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="db-card d-flex gap-3 align-items-start">
+              <i class="bi bi-search fs-1 text-warning flex-shrink-0" style="font-size: 47px !important;"></i>
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="fw-bold mb-1">10. Elasticsearch</h5>
+                  <span class="badge bg-warning text-dark">Search Engine</span>
+                </div>
+                <p class="small mb-1">Indexación y búsqueda de texto completo distribuida sobre logs y eventos en milisegundos.</p>
+                <small><strong>Uso en Claro:</strong> Auditoría del centro de seguridad (SOC) y eventos de ciberseguridad.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: FUNDAMENTOS (CORRECCIÓN VISUAL DE BADGES) -->
+    <section id="fundamentos" class="mb-5">
+      <div class="content-card">
+        <span class="badge-soft-blue mb-2 d-inline-block">🧠 Arquitectura Profesional</span>
+        <h2 class="h2 fw-bold mb-3">Los 6 Fundamentos Clave que Debes Dominar</h2>
+        <p class="mb-4">Pilares imprescindibles para escribir código de alto rendimiento bajo millones de transacciones:</p>
+
+        <div class="row g-3">
+          <!-- 1. ACID -->
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <span class="badge bg-danger mb-2">1. ACID</span>
+              <h6 class="fw-bold">Transaccionalidad</h6>
+              <p class="small mb-0"><strong>Atomicidad:</strong> Todo o nada. <strong>Consistencia:</strong> Reglas íntegras. <strong>Aislamiento:</strong> Bloqueos concurrentes. <strong>Durabilidad:</strong> Persistencia en disco tras el COMMIT.</p>
+            </div>
+          </div>
+
+          <!-- 2. B-Tree -->
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <span class="badge bg-primary mb-2">2. B-Tree</span>
+              <h6 class="fw-bold">Estrategias de Indexación</h6>
+              <p class="small mb-0">El <strong>Clustered Index</strong> ordena físicamente la tabla (solo uno). El <strong>Non-Clustered</strong> construye punteros hacia las filas. Diseñar índices cubrientes evita lecturas lentas.</p>
+            </div>
+          </div>
+
+          <!-- 3. 3FN vs OLAP (CORREGIDO: FONDO NEGRO CON TEXTO BLANCO PURO) -->
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <span class="badge bg-dark mb-2 text-white">3. 3FN vs OLAP</span>
+              <h6 class="fw-bold">Normalización</h6>
+              <p class="small mb-0">Normalizar en 3FN en sistemas operacionales (OLTP) para evitar redundancias; y desnormalizar en esquemas estrella para almacenes analíticos (OLAP).</p>
+            </div>
+          </div>
+
+          <!-- 4. Locks -->
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <span class="badge bg-warning text-dark mb-2">4. Locks</span>
+              <h6 class="fw-bold">Niveles de Aislamiento</h6>
+              <p class="small mb-0">Control de anomalías: Lecturas Sucias, Lecturas Fantasma y Lecturas no Repetibles usando Read Committed, Snapshot Isolation o Serializable.</p>
+            </div>
+          </div>
+
+          <!-- 5. Plans -->
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <span class="badge bg-info text-dark mb-2">5. Plans</span>
+              <h6 class="fw-bold">Execution Plans</h6>
+              <p class="small mb-0">Diferenciar un <code>Index Seek</code> (búsqueda rápida) de un <code>Table Scan</code> (lectura total costosa). Identificar operadores Sort y derrames a TempDB.</p>
+            </div>
+          </div>
+
+          <!-- 6. Partitions -->
+          <div class="col-md-4">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+              <span class="badge bg-success mb-2">6. Partitions</span>
+              <h6 class="fw-bold">Particionamiento</h6>
+              <p class="small mb-0">División horizontal de tablas masivas por rangos de fechas (ej. particiones mensuales de CDRs) para acelerar la poda de particiones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECCIÓN: MANUAL PASO A PASO DE INSTALACIÓN & CONFIGURACIÓN LOCAL
+         (Herramientas RDBMS, Python, Git & Power BI)
+    ========================================================================== -->
+    <section id="manual-instalacion" class="mb-5">
+      <div class="content-card">
+        
+        <!-- Encabezado de la Guía -->
+        <div class="text-center mb-4">
+          <span class="badge-soft-red mb-2 d-inline-block">🛠️ Laboratorio de Ingeniería Local</span>
+          <h2 class="h2 fw-bold" style="font-family: 'Space Grotesk', sans-serif;">Manual de Instalación Paso a Paso (Guía 100% Realista)</h2>
+          <p class="mb-3 mx-auto text-dark" style="max-width: 850px; font-size: 1.05rem;">
+            Para que no sufras errores de comandos no reconocidos (<code>The term is not recognized</code>), hemos separado claramente las <strong>dos alternativas disponibles para cada herramienta</strong>. Elige solo una:
+          </p>
+
+          <!-- Aviso de Orientación en Dos Tarjetas Separadas -->
+          <div class="row g-3 text-start mx-auto mb-4" style="max-width: 950px;">
+            <div class="col-md-6">
+              <div class="p-3 bg-white border border-2 border-success rounded-3 h-100" style="box-shadow: 4px 4px 0 #198754;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="badge bg-success text-white border border-dark">CAMINO 1 · RECOMENDADO</span>
+                  <strong class="text-success">Instalación Oficial en Windows (.exe / .msi)</strong>
+                </div>
+                <p class="small text-dark mb-0">
+                  <strong>100% garantizado para cualquier PC:</strong> Descargas el instalador con interfaz gráfica o usas el comando nativo de PowerShell (<code>curl.exe</code>). <strong>No necesitas tener Docker ni Winget instalados.</strong>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100" style="box-shadow: 4px 4px 0 #000;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="badge bg-dark text-white border border-dark">CAMINO 2 · DOCKER DESKTOP</span>
+                  <strong class="text-dark">Contenedores Ligeros</strong>
+                </div>
+                <p class="small text-secondary mb-0">
+                  <strong>Solo si ya tienes Docker instalado:</strong> Si no tienes Docker Desktop activo en tu Windows, <em>no uses esta opción</em> porque la terminal te responderá <code>docker: command not found</code>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENEDORES POR HERRAMIENTA -->
+        <div class="d-flex flex-column gap-5">
+
+          <!-- ==============================================================
+               1. MICROSOFT SQL SERVER 2022 + SSMS
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <!-- Encabezado Herramienta -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server" class="db-logo" style="width: 44px; height: 44px;">
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">1. Microsoft SQL Server 2022 &amp; SSMS</h4>
+                  <span class="badge bg-dark text-white border border-dark">Edición Developer Oficial</span>
+                  <span class="badge bg-danger text-white border border-dark">Puerto: 1433</span>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="https://www.microsoft.com/es-es/sql-server/sql-server-downloads" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-box-arrow-up-right"></i> Web Oficial Microsoft
+                </a>
+              </div>
+            </div>
+
+            <!-- VENTANA 1: INSTALACIÓN EN WINDOWS (RECOMENDADO) -->
+            <div class="p-3 bg-light border border-2 border-dark rounded-3 mb-4">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-dark">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-success text-white border border-dark">CAMINO 1 · OFICIAL WINDOWS</span>
+                  <h6 class="fw-bold mb-0 text-dark">Instalador Gráfico o Descarga Directa con PowerShell</h6>
+                </div>
+                <span class="badge bg-white text-dark border border-dark">Sin Docker · Sin Winget</span>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-lg-6">
+                  <h6 class="fw-bold text-dark small mb-1"><i class="bi bi-cursor-fill text-danger"></i> Opción A: Descarga Manual con Clic:</h6>
+                  <div class="d-flex gap-2 mb-2">
+                    <a href="https://go.microsoft.com/fwlink/p/?linkid=2215158" class="btn btn-sm btn-dark fw-bold d-flex align-items-center gap-1">
+                      <i class="bi bi-download"></i> 1. Descargar SQL Server 2022 (.exe)
+                    </a>
+                    <a href="https://aka.ms/ssmsfullsetup" class="btn btn-sm btn-outline-dark fw-bold border-2 d-flex align-items-center gap-1">
+                      <i class="bi bi-download"></i> 2. Descargar SSMS (.exe)
+                    </a>
+                  </div>
+                  <ol class="small text-dark ps-3 mb-0">
+                    <li class="mb-1">Ejecuta <code>SQL2022-SSEI-Dev.exe</code> y selecciona instalación <strong>Básica</strong>.</li>
+                    <li class="mb-1">Luego ejecuta el instalador de <strong>SSMS</strong> y pulsa <strong>Instalar</strong>.</li>
+                    <li>Abre SSMS, en <em>Server name</em> escribe <code>localhost</code> o <code>.</code> y pulsa <strong>Connect</strong>.</li>
+                  </ol>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h6 class="fw-bold text-dark small mb-0"><i class="bi bi-terminal-fill text-primary"></i> Opción B: Descarga Rápida en PowerShell (Nativo):</h6>
+                    <button class="btn btn-sm btn-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-sql-curl', this)">
+                      <i class="bi bi-clipboard"></i> Copiar Comando
+                    </button>
+                  </div>
+                  <div class="code-container my-1">
+                    <pre class="m-0 p-2"><code id="cmd-sql-curl" class="language-bash">cd "$env:USERPROFILE\Downloads"; curl.exe -o SQL2022-Dev.exe -L "https://go.microsoft.com/fwlink/p/?linkid=2215158"; Start-Process ".\SQL2022-Dev.exe"</code></pre>
+                  </div>
+                  <small class="text-muted d-block" style="font-size: 0.75rem;">💡 <code>curl.exe</code> viene de fábrica en Windows 10/11. Descarga el instalador oficial y lo abre automáticamente.</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- VENTANA 2: ALTERNATIVA DOCKER (SOLO SI TIENE DOCKER) -->
+            <div class="p-3 bg-white border border-2 border-secondary rounded-3">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-secondary">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-dark text-white border border-dark">CAMINO 2 · DOCKER</span>
+                  <h6 class="fw-bold mb-0 text-dark">Contenedor Oficial Microsoft (Solo si tienes Docker Desktop)</h6>
+                </div>
+                <button class="btn btn-sm btn-outline-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-sql-docker', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Docker
+                </button>
+              </div>
+              <p class="small text-danger mb-2">
+                <i class="bi bi-exclamation-triangle-fill"></i> <strong>Atención:</strong> Si no tienes Docker Desktop instalado en tu Windows, <strong>no ejecutes este comando</strong> porque te dará el error <em>'docker' is not recognized</em>.
+              </p>
+              <div class="code-container my-1">
+                <pre class="m-0 p-2"><code id="cmd-sql-docker" class="language-bash">docker run -d --name claro-sqlserver -p 1433:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=ClaroTelecom2026!*" mcr.microsoft.com/mssql/server:2022-latest</code></pre>
+              </div>
+            </div>
+
+            <!-- Barra de Verificación -->
+            <div class="mt-3 pt-2 border-top border-dark d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <small class="fw-bold text-dark"><i class="bi bi-check2-circle text-success"></i> Consulta SQL para verificar tu conexión en SSMS:</small>
+              <code class="text-dark bg-light px-2 py-1 border border-dark rounded">SELECT @@VERSION AS VersionSQLServer;</code>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               2. POSTGRESQL 16+ & PGADMIN 4
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <!-- Encabezado Herramienta -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="db-logo" style="width: 44px; height: 44px;">
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">2. PostgreSQL 16+ &amp; pgAdmin 4</h4>
+                  <span class="badge bg-info text-dark border border-dark">Código Abierto Avanzado</span>
+                  <span class="badge bg-dark text-white border border-dark">Puerto: 5432</span>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="https://www.postgresql.org/download/windows/" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-box-arrow-up-right"></i> Web Oficial PostgreSQL
+                </a>
+              </div>
+            </div>
+
+            <!-- VENTANA 1: INSTALACIÓN EN WINDOWS (RECOMENDADO) -->
+            <div class="p-3 bg-light border border-2 border-dark rounded-3 mb-4">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-dark">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-success text-white border border-dark">CAMINO 1 · OFICIAL WINDOWS</span>
+                  <h6 class="fw-bold mb-0 text-dark">Instalador Gráfico Oficial EnterpriseDB (Sin Consola)</h6>
+                </div>
+                <span class="badge bg-white text-dark border border-dark">Sin Docker · Sin Winget</span>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-lg-6">
+                  <h6 class="fw-bold text-dark small mb-1"><i class="bi bi-cursor-fill text-danger"></i> Opción A: Descarga Directa con Clic:</h6>
+                  <a href="https://get.enterprisedb.com/postgresql/postgresql-16.4-1-windows-x64.exe" class="btn btn-sm btn-dark fw-bold d-inline-flex align-items-center gap-1 mb-2">
+                    <i class="bi bi-download"></i> Descargar Instalador Postgres 16 (.exe)
+                  </a>
+                  <ol class="small text-dark ps-3 mb-0">
+                    <li class="mb-1">Ejecuta el archivo <code>postgresql-16-setup.exe</code>. Incluye el motor y <strong>pgAdmin 4</strong>.</li>
+                    <li class="mb-1">En el paso de contraseña, escribe una clave que recuerdes (ejemplo: <code>ClaroPostgres2026!</code>).</li>
+                    <li class="mb-1">Conserva el puerto predeterminado <code>5432</code> y el locale en <code>[Default locale]</code>.</li>
+                    <li>Abre <strong>pgAdmin 4</strong> desde el menú de inicio de Windows y conéctate.</li>
+                  </ol>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h6 class="fw-bold text-dark small mb-0"><i class="bi bi-terminal-fill text-primary"></i> Opción B: Descarga Rápida en PowerShell (Nativo):</h6>
+                    <button class="btn btn-sm btn-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-pg-curl', this)">
+                      <i class="bi bi-clipboard"></i> Copiar Comando
+                    </button>
+                  </div>
+                  <div class="code-container my-1">
+                    <pre class="m-0 p-2"><code id="cmd-pg-curl" class="language-bash">cd "$env:USERPROFILE\Downloads"; curl.exe -o postgres-setup.exe -L "https://get.enterprisedb.com/postgresql/postgresql-16.4-1-windows-x64.exe"; Start-Process ".\postgres-setup.exe" -ArgumentList "--install_runtimes 0"</code></pre>
+                  </div>
+                  <small class="text-muted d-block" style="font-size: 0.75rem;">💡 Descarga el instalador oficial de PostgreSQL y abre el asistente omitiendo conflictos con Visual C++ ya instalado (<code>--install_runtimes 0</code>).</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- VENTANA 2: ALTERNATIVA DOCKER (SOLO SI TIENE DOCKER) -->
+            <div class="p-3 bg-white border border-2 border-secondary rounded-3">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-secondary">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-dark text-white border border-dark">CAMINO 2 · DOCKER</span>
+                  <h6 class="fw-bold mb-0 text-dark">Contenedor Oficial PostgreSQL (Solo si tienes Docker Desktop)</h6>
+                </div>
+                <button class="btn btn-sm btn-outline-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-pg-docker', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Docker
+                </button>
+              </div>
+              <p class="small text-danger mb-2">
+                <i class="bi bi-exclamation-triangle-fill"></i> <strong>Atención:</strong> Si no tienes Docker Desktop instalado en tu Windows, <strong>no ejecutes este comando</strong> porque te dará el error <em>'docker' is not recognized</em>.
+              </p>
+              <div class="code-container my-1">
+                <pre class="m-0 p-2"><code id="cmd-pg-docker" class="language-bash">docker run -d --name claro-postgres -p 5432:5432 -e POSTGRES_PASSWORD=Claro2026! -e POSTGRES_DB=claro_ops_db postgres:16-alpine</code></pre>
+              </div>
+            </div>
+
+            <!-- Barra de Verificación -->
+            <div class="mt-3 pt-2 border-top border-dark d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <small class="fw-bold text-dark"><i class="bi bi-check2-circle text-success"></i> Consulta SQL para verificar tu conexión en pgAdmin:</small>
+              <code class="text-dark bg-light px-2 py-1 border border-dark rounded">SELECT version();</code>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               3. ORACLE DATABASE 23ai / 21c & SQL DEVELOPER
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <!-- Encabezado Herramienta -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" alt="Oracle Database" class="db-logo" style="width: 44px; height: 44px;">
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">3. Oracle Database 23ai / 21c XE &amp; SQL Developer</h4>
+                  <span class="badge bg-danger text-white border border-dark">Oracle Free Tier</span>
+                  <span class="badge bg-dark text-white border border-dark">Puerto: 1521 | PDB: FREEPDB1 / XEPDB1</span>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="https://www.oracle.com/database/technologies/appdev/xe.html" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-box-arrow-up-right"></i> Web Oficial Oracle Free
+                </a>
+              </div>
+            </div>
+
+            <!-- VENTANA 1: INSTALACIÓN EN WINDOWS (RECOMENDADO) -->
+            <div class="p-3 bg-light border border-2 border-dark rounded-3 mb-4">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-dark">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-success text-white border border-dark">CAMINO 1 · OFICIAL WINDOWS</span>
+                  <h6 class="fw-bold mb-0 text-dark">Instalación Gráfica con Paquete Oficial (.zip)</h6>
+                </div>
+                <span class="badge bg-white text-dark border border-dark">Sin Docker · Sin Terminal</span>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 mb-2">
+                <a href="https://www.oracle.com/database/technologies/appdev/xe.html" target="_blank" class="btn btn-sm btn-dark fw-bold d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-download"></i> 1. Descargar Oracle 23ai Free / 21c XE (.zip)
+                </a>
+                <a href="https://www.oracle.com/database/sqldeveloper/technologies/download/" target="_blank" class="btn btn-sm btn-outline-dark fw-bold border-2 d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-download"></i> 2. Descargar SQL Developer (con JDK embebido)
+                </a>
+              </div>
+              <ol class="small text-dark ps-3 mb-0">
+                <li class="mb-1">Descomprime el ZIP oficial de Oracle y ejecuta <code>setup.exe</code> como Administrador.</li>
+                <li class="mb-1">Define la contraseña maestra para los usuarios <code>SYS</code> y <code>SYSTEM</code> (ejemplo: <code>ClaroOracle2026#</code>).</li>
+                <li class="mb-1">Descomprime SQL Developer (la versión que incluye el JDK de Java) y abre <code>sqldeveloper.exe</code>.</li>
+                <li>Crea una nueva conexión: Host: <code>localhost</code>, Puerto: <code>1521</code>, Service Name: <code>FREEPDB1</code> (o <code>XEPDB1</code>), Usuario: <code>SYSTEM</code>.</li>
+              </ol>
+            </div>
+
+            <!-- VENTANA 2: ALTERNATIVA DOCKER (SOLO SI TIENE DOCKER) -->
+            <div class="p-3 bg-white border border-2 border-secondary rounded-3">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-secondary">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-dark text-white border border-dark">CAMINO 2 · DOCKER</span>
+                  <h6 class="fw-bold mb-0 text-dark">Contenedor Oracle Free en Docker Hub (Solo si tienes Docker Desktop)</h6>
+                </div>
+                <button class="btn btn-sm btn-outline-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-ora-docker', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Docker
+                </button>
+              </div>
+              <p class="small text-danger mb-2">
+                <i class="bi bi-exclamation-triangle-fill"></i> <strong>Atención:</strong> Si no tienes Docker Desktop instalado en tu Windows, <strong>no ejecutes este comando</strong> porque te dará el error <em>'docker' is not recognized</em>.
+              </p>
+              <div class="code-container my-1">
+                <pre class="m-0 p-2"><code id="cmd-ora-docker" class="language-bash">docker run -d --name claro-oracle23ai -p 1521:1521 -e ORACLE_PASSWORD=ClaroOracle2026# gvenzl/oracle-free:latest</code></pre>
+              </div>
+              <small class="text-muted d-block" style="font-size: 0.75rem;">💡 Imagen pública en Docker Hub mantenida por Oracle. No requiere login ni registro de cuenta.</small>
+            </div>
+
+            <!-- Barra de Verificación -->
+            <div class="mt-3 pt-2 border-top border-dark d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <small class="fw-bold text-dark"><i class="bi bi-check2-circle text-success"></i> Consulta SQL para verificar tu conexión en SQL Developer:</small>
+              <code class="text-dark bg-light px-2 py-1 border border-dark rounded">SELECT banner FROM v$version;</code>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               4. MYSQL 8.4 LTS / 8.0 & MYSQL WORKBENCH
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <!-- Encabezado Herramienta -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="db-logo" style="width: 44px; height: 44px;">
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">4. MySQL 8.4 LTS / 8.0 &amp; MySQL Workbench</h4>
+                  <span class="badge bg-primary text-white border border-dark">Motor InnoDB</span>
+                  <span class="badge bg-dark text-white border border-dark">Puerto: 3306</span>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="https://dev.mysql.com/downloads/installer/" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-box-arrow-up-right"></i> Web Oficial MySQL
+                </a>
+              </div>
+            </div>
+
+            <!-- VENTANA 1: INSTALACIÓN EN WINDOWS (RECOMENDADO) -->
+            <div class="p-3 bg-light border border-2 border-dark rounded-3 mb-4">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-dark">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-success text-white border border-dark">CAMINO 1 · OFICIAL WINDOWS</span>
+                  <h6 class="fw-bold mb-0 text-dark">Instalador Gráfico Oficial MySQL Installer (Sin Consola)</h6>
+                </div>
+                <span class="badge bg-white text-dark border border-dark">Sin Docker · Sin Winget</span>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-lg-6">
+                  <h6 class="fw-bold text-dark small mb-1"><i class="bi bi-cursor-fill text-danger"></i> Opción A: Descarga Directa con Clic:</h6>
+                  <a href="https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-8.0.39.0.msi" class="btn btn-sm btn-dark fw-bold d-inline-flex align-items-center gap-1 mb-2">
+                    <i class="bi bi-download"></i> Descargar MySQL Installer (.msi)
+                  </a>
+                  <ol class="small text-dark ps-3 mb-0">
+                    <li class="mb-1">Ejecuta el archivo <code>.msi</code> y selecciona el modo <strong>Developer Default</strong>.</li>
+                    <li class="mb-1">En el paso de cuentas de usuario, define una contraseña para el usuario maestro <code>root</code> (ej: <code>ClaroMySQL2026!</code>).</li>
+                    <li class="mb-1">Deja el puerto en <code>3306</code> y finaliza la configuración.</li>
+                    <li>Abre <strong>MySQL Workbench</strong>, haz clic en la conexión local <code>root@localhost:3306</code> e ingresa tu clave.</li>
+                  </ol>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h6 class="fw-bold text-dark small mb-0"><i class="bi bi-terminal-fill text-primary"></i> Opción B: Descarga Rápida en PowerShell (Nativo):</h6>
+                    <button class="btn btn-sm btn-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-my-curl', this)">
+                      <i class="bi bi-clipboard"></i> Copiar Comando
+                    </button>
+                  </div>
+                  <div class="code-container my-1">
+                    <pre class="m-0 p-2"><code id="cmd-my-curl" class="language-bash">cd "$env:USERPROFILE\Downloads"; curl.exe -o mysql-setup.msi -L "https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-8.0.39.0.msi"; Start-Process ".\mysql-setup.msi"</code></pre>
+                  </div>
+                  <small class="text-muted d-block" style="font-size: 0.75rem;">💡 Descarga el instalador oficial directo y lanza el asistente visual sin depender de Winget.</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- VENTANA 2: ALTERNATIVA DOCKER (SOLO SI TIENE DOCKER) -->
+            <div class="p-3 bg-white border border-2 border-secondary rounded-3">
+              <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-secondary">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-dark text-white border border-dark">CAMINO 2 · DOCKER</span>
+                  <h6 class="fw-bold mb-0 text-dark">Contenedor Oficial MySQL (Solo si tienes Docker Desktop)</h6>
+                </div>
+                <button class="btn btn-sm btn-outline-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-my-docker', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Docker
+                </button>
+              </div>
+              <p class="small text-danger mb-2">
+                <i class="bi bi-exclamation-triangle-fill"></i> <strong>Atención:</strong> Si no tienes Docker Desktop instalado en tu Windows, <strong>no ejecutes este comando</strong> porque te dará el error <em>'docker' is not recognized</em>.
+              </p>
+              <div class="code-container my-1">
+                <pre class="m-0 p-2"><code id="cmd-my-docker" class="language-bash">docker run -d --name claro-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=Claro2026! -e MYSQL_DATABASE=claro_ops_db mysql:8.0</code></pre>
+              </div>
+            </div>
+
+            <!-- Barra de Verificación -->
+            <div class="mt-3 pt-2 border-top border-dark d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <small class="fw-bold text-dark"><i class="bi bi-check2-circle text-success"></i> Consulta SQL para verificar tu conexión en Workbench:</small>
+              <code class="text-dark bg-light px-2 py-1 border border-dark rounded">SELECT VERSION(), CURRENT_USER();</code>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               5. PYTHON 3.12+ (DATA ANALYTICS, MACHINE LEARNING & APIS)
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="db-logo" style="width: 44px; height: 44px;">
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">5. Python 3.12+ &amp; Librerías para Conexión a Bases de Datos</h4>
+                  <span class="badge bg-warning text-dark border border-dark">Data Science &amp; AI Integration</span>
+                  <span class="badge bg-dark text-white border border-dark">Drivers: pyodbc, psycopg2, oracledb, mysql-connector</span>
+                </div>
+              </div>
+              <a href="https://www.python.org/downloads/" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                <i class="bi bi-download"></i> Descargar Python Oficial (.exe)
+              </a>
+            </div>
+
+            <div class="row g-4">
+              <!-- PASO A PASO INSTALACIÓN -->
+              <div class="col-lg-5">
+                <div class="p-3 bg-light border border-2 border-dark rounded-3 h-100">
+                  <span class="badge bg-success text-white border border-dark mb-2">PASO 1 · INSTALACIÓN</span>
+                  <h6 class="fw-bold text-dark mb-2">Instalador Oficial de Python</h6>
+                  <ol class="small text-dark ps-3 mb-0">
+                    <li class="mb-2">Descarga el instalador con el botón superior.</li>
+                    <li class="mb-2"><strong class="text-danger">[X] ¡Casilla Crítica!:</strong> Marca obligatoriamente la casilla <strong>Add python.exe to PATH</strong> abajo antes de presionar <em>Install Now</em>.</li>
+                    <li>Abre una nueva ventana de PowerShell y escribe <code>python --version</code> para confirmar.</li>
+                  </ol>
+                </div>
+              </div>
+
+              <!-- COMANDOS DE TERMINAL INDEPENDIENTES -->
+              <div class="col-lg-7">
+                <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+                  <span class="badge bg-dark text-white border border-dark mb-2">PASO 2 · ENTORNO &amp; LIBRERÍAS</span>
+                  <h6 class="fw-bold text-dark mb-2">Comandos en PowerShell (Copia cada caja por separado)</h6>
+
+                  <!-- CAJA 1: VENV -->
+                  <div class="mb-3 p-2 bg-light border border-dark rounded-2">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <span class="small fw-bold text-dark"><i class="bi bi-folder-fill text-warning"></i> 1. Crear y Activar Entorno Virtual:</span>
+                      <button class="btn btn-sm btn-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-py-venv', this)">
+                        <i class="bi bi-clipboard"></i> Copiar
+                      </button>
+                    </div>
+                    <div class="code-container my-1">
+                      <pre class="m-0 p-2"><code id="cmd-py-venv" class="language-bash">python -m venv env_telecom; Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned; .\env_telecom\Scripts\Activate.ps1</code></pre>
+                    </div>
+                  </div>
+
+                  <!-- CAJA 2: PIP INSTALL -->
+                  <div class="p-2 bg-light border border-dark rounded-2">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <span class="small fw-bold text-dark"><i class="bi bi-box-fill text-success"></i> 2. Instalar Conectores de los 4 Motores:</span>
+                      <button class="btn btn-sm btn-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-py-pip', this)">
+                        <i class="bi bi-clipboard"></i> Copiar
+                      </button>
+                    </div>
+                    <div class="code-container my-1">
+                      <pre class="m-0 p-2"><code id="cmd-py-pip" class="language-bash">pip install pandas sqlalchemy pyodbc psycopg2-binary mysql-connector-python oracledb</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               6. GIT, GITHUB CLI & VISUAL STUDIO CODE
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="db-logo" style="width: 44px; height: 44px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="db-logo" style="width: 44px; height: 44px;">
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">6. Git, GitHub &amp; Visual Studio Code</h4>
+                  <span class="badge bg-dark text-white border border-dark">Control de Versiones &amp; Editor Moderno</span>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="https://code.visualstudio.com/" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-download"></i> Descargar VS Code (.exe)
+                </a>
+                <a href="https://git-scm.com/downloads" target="_blank" class="btn btn-outline-dark btn-sm border-2 fw-bold d-flex align-items-center gap-1" rel="noopener noreferrer">
+                  <i class="bi bi-download"></i> Descargar Git SCM (.exe)
+                </a>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-lg-5">
+                <div class="p-3 bg-light border border-2 border-dark rounded-3 h-100">
+                  <span class="badge bg-success text-white border border-dark mb-2">PASO 1 · INSTALACIÓN</span>
+                  <h6 class="fw-bold text-dark mb-2">Instalación con Asistente Visual</h6>
+                  <ol class="small text-dark ps-3 mb-0">
+                    <li class="mb-2">Descarga e instala VS Code y Git con las opciones recomendadas por defecto.</li>
+                    <li>Abre VS Code, presiona <code>Ctrl+Shift+X</code> e instala las extensiones: <em>SQL Server (mssql)</em>, <em>PostgreSQL</em> y <em>Python</em>.</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div class="col-lg-7">
+                <div class="p-3 bg-white border border-2 border-dark rounded-3 h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small fw-bold text-dark"><i class="bi bi-git text-danger"></i> Configurar tu Nombre y Correo en Git:</span>
+                    <button class="btn btn-sm btn-dark py-0 px-2 fw-bold" onclick="copiarAlPortapapeles('cmd-git-config', this)">
+                      <i class="bi bi-clipboard"></i> Copiar
+                    </button>
+                  </div>
+                  <div class="code-container my-1">
+                    <pre class="m-0 p-2"><code id="cmd-git-config" class="language-bash">git config --global user.name "Tu Nombre Completo"
+git config --global user.email "tu-email@dominio.com"
+git config --global init.defaultBranch main</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               7. POWER BI DESKTOP (BUSINESS INTELLIGENCE & TELECOM DASHBOARDS)
+          =============================================================== -->
+          <div class="p-4 bg-white border border-2 border-dark rounded-3 shadow-sm" style="box-shadow: 5px 5px 0 #000;">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom border-2 border-dark">
+              <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-bar-chart-fill text-warning fs-1 flex-shrink-0" style="font-size: 47px !important;"></i>
+                <div>
+                  <h4 class="fw-bold mb-0 text-dark" style="font-family: 'Space Grotesk', sans-serif;">7. Power BI Desktop</h4>
+                  <span class="badge bg-warning text-dark border border-dark">Business Intelligence &amp; DAX</span>
+                  <span class="badge bg-dark text-white border border-dark">Visualización Ejecutiva de SLAs</span>
+                </div>
+              </div>
+              <a href="https://www.microsoft.com/es-es/power-platform/products/power-bi/desktop" target="_blank" class="btn btn-claro btn-sm d-flex align-items-center gap-1" rel="noopener noreferrer">
+                <i class="bi bi-download"></i> Descargar Power BI Desktop (.msi)
+              </a>
+            </div>
+
+            <div class="p-3 bg-light border border-2 border-dark rounded-3">
+              <h6 class="fw-bold text-dark mb-2"><i class="bi bi-diagram-3-fill text-primary"></i> Conexión a SQL Server &amp; PostgreSQL para Auditorías Regulatorias:</h6>
+              <ol class="small text-dark ps-3 mb-2">
+                <li class="mb-1">Descarga el instalador oficial <code>PBIDesktopSetup_x64.msi</code> con el botón superior y ejecútalo.</li>
+                <li class="mb-1">Abre Power BI Desktop &gt; haz clic en <strong>Obtener Datos (Get Data)</strong> &gt; selecciona <strong>SQL Server Database</strong> o <strong>PostgreSQL Database</strong>.</li>
+                <li class="mb-1">En el campo <em>Servidor</em> ingresa <code>localhost</code> y en <em>Base de Datos</em> coloca <code>ClaroOpsDB</code> (o <code>claro_ops_db</code>).</li>
+                <li class="mb-1">Selecciona el modo <strong>DirectQuery</strong> para telemetría en tiempo real o <strong>Import</strong> para modelo VertiPaq en memoria.</li>
+                <li>Selecciona la vista creada en el laboratorio: <code>vw_MonitorSLA_IncidenciasCriticas</code> para graficar de inmediato los tickets fuera de SLA.</li>
+              </ol>
+              <small class="text-muted d-block border-top border-secondary pt-2">
+                💡 <em>Nota para PostgreSQL en Power BI:</em> Al conectarte por primera vez en local, si solicita soporte de cifrado, selecciona la opción <strong>"Permitir conexiones no cifradas"</strong> en el cuadro de diálogo para pruebas locales.
+              </small>
+            </div>
+          </div>
+
+        </div> <!-- Fin acordeón/bloques -->
+
+      </div>
+    </section>
+
+
+    <!-- SECCIÓN 3: PIPELINE LÓGICO -->
+    <section id="pipeline" class="mb-5">
+      <div class="content-card">
+        <div class="text-center mb-4">
+          <span class="badge-soft-red mb-2 d-inline-block">⚡ Pipeline Interno del Motor</span>
+          <h2 class="h2 fw-bold">El Orden Lógico de Ejecución</h2>
+          <p>El motor relacional sigue este flujo estricto paso a paso en todos los motores ANSI SQL:</p>
+        </div>
+
+        <div class="p-3 bg-white border border-2 border-dark rounded-3">
+          <div class="row text-center g-2">
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">1</span>
+                <h6 class="fw-bold mb-0">FROM &amp; JOIN</h6>
+                <small>Define universo y cruces</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">2</span>
+                <h6 class="fw-bold mb-0">WHERE</h6>
+                <small>Filtra filas individuales</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">3</span>
+                <h6 class="fw-bold mb-0">GROUP BY</h6>
+                <small>Colapsa en grupos</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">4</span>
+                <h6 class="fw-bold mb-0">HAVING</h6>
+                <small>Filtra agregados SUM/AVG</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3 bg-light">
+                <span class="badge bg-danger mb-1">5</span>
+                <h6 class="fw-bold mb-0 text-danger">SELECT</h6>
+                <small>Crea columnas y ALIAS</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">6</span>
+                <h6 class="fw-bold mb-0">DISTINCT</h6>
+                <small>Elimina duplicados</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">7</span>
+                <h6 class="fw-bold mb-0">ORDER BY</h6>
+                <small>Ordena (acepta alias)</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 border border-2 border-dark rounded-3">
+                <span class="badge bg-danger mb-1">8</span>
+                <h6 class="fw-bold mb-0">TOP / LIMIT</h6>
+                <small>Trunca la respuesta final</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: DIAGRAMA E-R -->
+    <section id="diagrama-er" class="mb-5">
+      <div class="er-wrap">
+        <h4 class="fw-bold mb-1">🧬 Diagrama Entidad-Relación (3FN)</h4>
+        <p class="mb-3">Modelo relacional idéntico en los 4 motores con relaciones <strong>1 : N</strong> hacia la tabla transaccional central:</p>
+
+        <div class="er-legend mb-3 py-2 border-bottom border-dark">
+          <span>🔑 Llave Primaria (PK)</span>
+          <span>🔗 Llave Foránea (FK)</span>
+          <span>⭐ Campo Único (UK)</span>
+          <span>1 → N: Uno a Muchos</span>
+        </div>
+
+        <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama Entidad-Relación">
+          <path d="M300 74H330V212H360" fill="none" stroke="#000000" stroke-width="2"/>
+          <path d="M300 334H330V236H360" fill="none" stroke="#000000" stroke-width="2"/>
+          <path d="M700 74H670V260H640" fill="none" stroke="#000000" stroke-width="2"/>
+          
+          <text x="306" y="68" font-size="14" font-weight="800" fill="#DA291C">1</text>
+          <text x="340" y="206" font-size="14" font-weight="800" fill="#DA291C">N</text>
+          <text x="306" y="328" font-size="14" font-weight="800" fill="#DA291C">1</text>
+          <text x="340" y="230" font-size="14" font-weight="800" fill="#DA291C">N</text>
+          <text x="684" y="68" font-size="14" font-weight="800" fill="#DA291C">1</text>
+          <text x="648" y="254" font-size="14" font-weight="800" fill="#DA291C">N</text>
+
+          <!-- Clientes -->
+          <rect x="30" y="30" width="270" height="200" rx="8" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+          <rect x="30" y="30" width="270" height="32" rx="8" fill="#000000"/>
+          <text x="44" y="52" fill="#FFFFFF" font-size="14" font-weight="800" font-family="'Space Grotesk', sans-serif">🗄️ ClientesTelecom</text>
+          <text x="42" y="80" font-size="12.5" font-weight="700" fill="#DA291C">🔑 ClienteID (PK)</text>
+          <text x="42" y="102" font-size="12.5" font-weight="700" fill="#000000">⭐ Identificacion (UK)</text>
+          <text x="42" y="124" font-size="12.5" font-weight="600" fill="#000000">▫️ NombreCompleto</text>
+          <text x="42" y="146" font-size="12.5" font-weight="600" fill="#000000">▫️ TelefonoContacto</text>
+          <text x="42" y="168" font-size="12.5" font-weight="600" fill="#000000">▫️ Provincia</text>
+          <text x="42" y="190" font-size="12.5" font-weight="600" fill="#000000">▫️ Municipio</text>
+          <text x="42" y="212" font-size="12.5" font-weight="600" fill="#000000">▫️ FechaAlta</text>
+
+          <!-- TiposServicios -->
+          <rect x="30" y="270" width="270" height="135" rx="8" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+          <rect x="30" y="270" width="270" height="32" rx="8" fill="#000000"/>
+          <text x="44" y="292" fill="#FFFFFF" font-size="14" font-weight="800" font-family="'Space Grotesk', sans-serif">🗄️ TiposServicios</text>
+          <text x="42" y="322" font-size="12.5" font-weight="700" fill="#DA291C">🔑 ServicioID (PK)</text>
+          <text x="42" y="344" font-size="12.5" font-weight="700" fill="#000000">⭐ CodigoServicio (UK)</text>
+          <text x="42" y="366" font-size="12.5" font-weight="600" fill="#000000">▫️ Descripcion</text>
+          <text x="42" y="388" font-size="12.5" font-weight="600" fill="#000000">▫️ SLA_EstandarHoras</text>
+
+          <!-- TicketsAverias -->
+          <rect x="360" y="70" width="280" height="295" rx="8" fill="#FFFFFF" stroke="#DA291C" stroke-width="3"/>
+          <rect x="360" y="70" width="280" height="32" rx="8" fill="#DA291C"/>
+          <text x="374" y="92" fill="#FFFFFF" font-size="14" font-weight="800" font-family="'Space Grotesk', sans-serif">⚡ TicketsAverias (Hechos)</text>
+          <text x="372" y="122" font-size="12.5" font-weight="700" fill="#DA291C">🔑 TicketID (PK)</text>
+          <text x="372" y="144" font-size="12.5" font-weight="700" fill="#0284C7">🔗 ClienteID (FK)</text>
+          <text x="372" y="166" font-size="12.5" font-weight="700" fill="#0284C7">🔗 ServicioID (FK)</text>
+          <text x="372" y="188" font-size="12.5" font-weight="700" fill="#0284C7">🔗 NodoID (FK)</text>
+          <text x="372" y="210" font-size="12.5" font-weight="600" fill="#000000">▫️ NumeroIncidencia</text>
+          <text x="372" y="232" font-size="12.5" font-weight="600" fill="#000000">▫️ TipoReclamo</text>
+          <text x="372" y="254" font-size="12.5" font-weight="600" fill="#000000">▫️ Prioridad</text>
+          <text x="372" y="276" font-size="12.5" font-weight="600" fill="#000000">▫️ Estatus</text>
+          <text x="372" y="298" font-size="12.5" font-weight="600" fill="#000000">▫️ FechaApertura</text>
+          <text x="372" y="320" font-size="12.5" font-weight="600" fill="#000000">▫️ FechaCierre</text>
+          <text x="372" y="342" font-size="12.5" font-weight="600" fill="#000000">▫️ MinutosInterrupcion</text>
+
+          <!-- Nodos -->
+          <rect x="700" y="30" width="270" height="135" rx="8" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+          <rect x="700" y="30" width="270" height="32" rx="8" fill="#000000"/>
+          <text x="714" y="52" fill="#FFFFFF" font-size="14" font-weight="800" font-family="'Space Grotesk', sans-serif">🗄️ NodosDistribucion</text>
+          <text x="712" y="82" font-size="12.5" font-weight="700" fill="#DA291C">🔑 NodoID (PK)</text>
+          <text x="712" y="104" font-size="12.5" font-weight="700" fill="#000000">⭐ CodigoNodo (UK)</text>
+          <text x="712" y="126" font-size="12.5" font-weight="600" fill="#000000">▫️ Sector</text>
+          <text x="712" y="148" font-size="12.5" font-weight="600" fill="#000000">▫️ Tecnologia</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: TABS MULTI-MOTOR (CON SINTAXIS CORREGIDA) -->
+    <section id="motores-tabs" class="mb-5">
+      <div class="content-card">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+          <div>
+            <span class="badge-soft-red mb-2 d-inline-block">💻 4 Motores en Acción</span>
+            <h2 class="h2 fw-bold mb-1">Código Completo &amp; Resultados Emulados</h2>
+            <p class="mb-0">Scripts completos con <strong>resaltado de sintaxis de alto contraste</strong> y sin barras de scroll vertical:</p>
+          </div>
+        </div>
+
+        <ul class="nav nav-tabs nav-tabs-engines mt-4" id="engineTabs" role="tablist">
+          <li class="nav-item">
+            <button class="nav-link active" id="sqlserver-tab" data-bs-toggle="tab" data-bs-target="#sqlserver-pane" type="button">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" width="22" alt="SQL Server">
+              SQL Server (T-SQL)
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" id="postgres-tab" data-bs-toggle="tab" data-bs-target="#postgres-pane" type="button">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="22" alt="Postgres">
+              PostgreSQL (PL/pgSQL)
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" id="oracle-tab" data-bs-toggle="tab" data-bs-target="#oracle-pane" type="button">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" width="22" alt="Oracle">
+              Oracle Database (PL/SQL)
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" id="mysql-tab" data-bs-toggle="tab" data-bs-target="#mysql-pane" type="button">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="22" alt="MySQL">
+              MySQL 8.0+ (InnoDB)
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content border border-2 border-dark border-top-0 p-3 bg-white rounded-bottom-3" id="engineTabsContent">
+          
+          <!-- TAB 1: SQL SERVER -->
+          <div class="tab-pane fade show active" id="sqlserver-pane">
+            <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
+              <h5 class="fw-bold mb-0">Microsoft SQL Server — Script T-SQL Completo</h5>
+              <button class="btn btn-sm btn-outline-danger fw-bold" onclick="descargarScriptEspecifico('sqlserver')">
+                <i class="bi bi-download"></i> Descargar .sql
+              </button>
+            </div>
+
+            <div class="code-container">
+              <div class="code-header">
+                <span class="code-title"><i class="bi bi-filetype-sql"></i> Claro_SQLServer_T-SQL.sql (High-Contrast Theme)</span>
+                <button class="btn-copy" onclick="copiarAlPortapapeles('code-sqlserver', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Código
+                </button>
+              </div>
+              <pre><code id="code-sqlserver" class="language-sql">-- ============================================================================
+-- MOTOR: MICROSOFT SQL SERVER 2019 / 2022
+-- ESQUEMA COMPLETO: GESTIÓN DE AVERÍAS CLARO DOMINICANA
+-- ============================================================================
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'ClaroOpsDB')
+BEGIN
+    CREATE DATABASE ClaroOpsDB;
+END
+GO
+
+USE ClaroOpsDB;
+GO
+
+IF OBJECT_ID('dbo.TicketsAverias', 'U') IS NOT NULL DROP TABLE dbo.TicketsAverias;
+IF OBJECT_ID('dbo.NodosDistribucion', 'U') IS NOT NULL DROP TABLE dbo.NodosDistribucion;
+IF OBJECT_ID('dbo.ClientesTelecom', 'U') IS NOT NULL DROP TABLE dbo.ClientesTelecom;
+IF OBJECT_ID('dbo.TiposServicios', 'U') IS NOT NULL DROP TABLE dbo.TiposServicios;
+GO
+
+-- 1. TABLA: Tipos de Servicios y SLA INDOTEL
+CREATE TABLE TiposServicios (
+    ServicioID INT IDENTITY(1,1) CONSTRAINT PK_TiposServicios PRIMARY KEY,
+    CodigoServicio VARCHAR(20) NOT NULL UNIQUE,
+    Descripcion VARCHAR(100) NOT NULL,
+    SLA_EstandarHoras INT NOT NULL
+);
+
+-- 2. TABLA: Clientes
+CREATE TABLE ClientesTelecom (
+    ClienteID INT IDENTITY(100000, 1) CONSTRAINT PK_ClientesTelecom PRIMARY KEY,
+    Identificacion VARCHAR(15) NOT NULL UNIQUE,
+    NombreCompleto VARCHAR(150) NOT NULL,
+    TelefonoContacto VARCHAR(15) NOT NULL,
+    Provincia VARCHAR(50) NOT NULL,
+    Municipio VARCHAR(50) NOT NULL,
+    FechaAlta DATETIME2 DEFAULT SYSUTCDATETIME()
+);
+
+-- 3. TABLA: Nodos de Telecomunicación
+CREATE TABLE NodosDistribucion (
+    NodoID INT IDENTITY(1,1) CONSTRAINT PK_NodosDistribucion PRIMARY KEY,
+    CodigoNodo VARCHAR(30) NOT NULL UNIQUE,
+    Sector VARCHAR(80) NOT NULL,
+    Tecnologia VARCHAR(30) NOT NULL
+);
+
+-- 4. TABLA: Tickets de Averías
+CREATE TABLE TicketsAverias (
+    TicketID BIGINT IDENTITY(1,1) CONSTRAINT PK_TicketsAverias PRIMARY KEY,
+    NumeroIncidencia AS ('TK-' + CAST(TicketID AS VARCHAR(20))),
+    ClienteID INT NOT NULL,
+    ServicioID INT NOT NULL,
+    NodoID INT NOT NULL,
+    TipoReclamo VARCHAR(50) NOT NULL,
+    Prioridad VARCHAR(15) NOT NULL CONSTRAINT CHK_Prioridad_SS CHECK (Prioridad IN ('Baja', 'Media', 'Alta', 'Critica')),
+    Estatus VARCHAR(20) NOT NULL CONSTRAINT CHK_Estatus_SS CHECK (Estatus IN ('Abierto', 'En Ruta', 'En Pruebas', 'Cerrado', 'Escalado_Indotel')),
+    FechaApertura DATETIME2 DEFAULT SYSUTCDATETIME(),
+    FechaCierre DATETIME2 NULL,
+    MinutosInterrupcion INT DEFAULT 0,
+    CONSTRAINT FK_TK_Clientes FOREIGN KEY (ClienteID) REFERENCES ClientesTelecom(ClienteID),
+    CONSTRAINT FK_TK_Servicios FOREIGN KEY (ServicioID) REFERENCES TiposServicios(ServicioID),
+    CONSTRAINT FK_TK_Nodos FOREIGN KEY (NodoID) REFERENCES NodosDistribucion(NodoID)
+);
+
+CREATE NONCLUSTERED INDEX IX_Tickets_Estatus_Prioridad 
+ON TicketsAverias (Estatus, Prioridad) 
+INCLUDE (ServicioID, NodoID, MinutosInterrupcion, FechaApertura);
+GO
+
+-- ============================================================================
+-- INSERTS DE DATOS REALISTAS DE TELECOMUNICACIONES
+-- ============================================================================
+INSERT INTO TiposServicios (CodigoServicio, Descripcion, SLA_EstandarHoras) VALUES
+('FTTH_GPON', 'Fibra Óptica Residencial', 4),
+('MOVIL_5G', 'Móvil Postpago 5G Ultra', 6),
+('CLARO_TV', 'Televisión Digital Claro TV+', 12),
+('SIP_TRUNK', 'Troncal Enlace Dedicado', 2);
+
+INSERT INTO NodosDistribucion (CodigoNodo, Sector, Tecnologia) VALUES
+('ND-SD-PIANTINI-01', 'Piantini, Distrito Nacional', 'FTTH-GPON'),
+('ND-SD-BELLAVISTA-02', 'Bella Vista, Distrito Nacional', 'FTTH-GPON'),
+('ND-SD-NACO-03', 'Naco, Distrito Nacional', 'FTTH-GPON'),
+('ND-STI-CENTRO-01', 'Santiago Centro, Santiago', '5G-NR'),
+('ND-HG-BAVARO-01', 'Bávaro, La Altagracia', 'LTE-A');
+
+INSERT INTO ClientesTelecom (Identificacion, NombreCompleto, TelefonoContacto, Provincia, Municipio) VALUES
+('001-1234567-8', 'Juan Carlos Pérez', '809-555-0101', 'Distrito Nacional', 'Santo Domingo'),
+('001-9876543-2', 'María Altagracia Rodríguez', '809-555-0102', 'Distrito Nacional', 'Santo Domingo'),
+('031-4567890-1', 'Pedro Martínez', '829-555-0103', 'Santiago', 'Santiago de los Caballeros'),
+('402-2345678-9', 'Ana Sofía Morales', '849-555-0104', 'La Altagracia', 'Higüey'),
+('001-5544332-1', 'Luis Fernando Gómez', '809-555-0105', 'Distrito Nacional', 'Santo Domingo'),
+('031-9988776-5', 'Carmen Mercedes Peña', '829-555-0106', 'Santiago', 'Santiago de los Caballeros');
+
+INSERT INTO TicketsAverias (ClienteID, ServicioID, NodoID, TipoReclamo, Prioridad, Estatus, MinutosInterrupcion) VALUES
+(100000, 1, 1, 'Corte Total de Fibra por Obra Metro', 'Critica', 'Abierto', 720),
+(100001, 1, 1, 'Atenuación Severa en OLT', 'Alta', 'En Ruta', 680),
+(100004, 1, 1, 'ONT Sin Sincronismo Óptico', 'Critica', 'Escalado_Indotel', 840),
+(100000, 1, 2, 'Rotura de Splitter Secundario', 'Critica', 'Abierto', 910),
+(100001, 1, 2, 'Fibra Caída por Poste Dañado', 'Alta', 'En Ruta', 950),
+(100004, 1, 2, 'Pérdida de Potencia Óptica', 'Alta', 'Abierto', 450),
+(100002, 2, 4, 'Caída de Portadora 5G Banda 3.5GHz', 'Critica', 'Abierto', 1100),
+(100005, 2, 4, 'Degradación de Throughput Móvil', 'Alta', 'En Ruta', 800),
+(100003, 3, 5, 'Decodificador con Error IPTV-302', 'Media', 'Cerrado', 90),
+(100002, 1, 4, 'Router Reiniciando Continuamente', 'Baja', 'Cerrado', 45);
+GO
+
+-- ============================================================================
+-- QUERY ANALÍTICO LÓGICO: TOP 5 NODOS CRÍTICOS FUERA DE PARÁMETROS
+-- ============================================================================
+SELECT TOP 5
+    N.CodigoNodo,
+    N.Sector,
+    S.Descripcion AS NombreServicio,
+    COUNT(T.TicketID) AS CantidadAverias,
+    SUM(T.MinutosInterrupcion) AS TotalMinutosCaidos,
+    AVG(T.MinutosInterrupcion) AS PromedioPorCliente
+FROM TicketsAverias T
+INNER JOIN NodosDistribucion N ON T.NodoID = N.NodoID
+INNER JOIN TiposServicios S ON T.ServicioID = S.ServicioID
+WHERE T.Estatus IN ('Abierto', 'En Ruta', 'Escalado_Indotel')
+  AND T.Prioridad IN ('Alta', 'Critica')
+GROUP BY N.CodigoNodo, N.Sector, S.Descripcion
+HAVING SUM(T.MinutosInterrupcion) > 1000
+ORDER BY TotalMinutosCaidos DESC;
+GO</code></pre>
+            </div>
+
+            <!-- RESULTADO EMULADO SQL SERVER -->
+            <div class="res-box">
+              <h6 class="fw-bold mb-2">📊 Resultado Emulado en SSMS (Result Grid) — 3 Filas Devueltas</h6>
+              <table>
+                <thead>
+                  <tr>
+                    <th>CodigoNodo</th>
+                    <th>Sector</th>
+                    <th>NombreServicio</th>
+                    <th>CantidadAverias</th>
+                    <th>TotalMinutosCaidos</th>
+                    <th>PromedioPorCliente</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ND-SD-BELLAVISTA-02</strong></td>
+                    <td>Bella Vista, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2310 min</strong></td>
+                    <td>770 min</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-SD-PIANTINI-01</strong></td>
+                    <td>Piantini, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2240 min</strong></td>
+                    <td>746 min</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-STI-CENTRO-01</strong></td>
+                    <td>Santiago Centro, Santiago</td>
+                    <td>Móvil Postpago 5G Ultra</td>
+                    <td>2</td>
+                    <td><strong class="text-danger">1900 min</strong></td>
+                    <td>950 min</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 2: POSTGRESQL -->
+          <div class="tab-pane fade" id="postgres-pane">
+            <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
+              <h5 class="fw-bold mb-0">PostgreSQL — Script Nativo Completo</h5>
+              <button class="btn btn-sm btn-outline-danger fw-bold" onclick="descargarScriptEspecifico('postgres')">
+                <i class="bi bi-download"></i> Descargar .sql
+              </button>
+            </div>
+
+            <div class="code-container">
+              <div class="code-header">
+                <span class="code-title"><i class="bi bi-filetype-sql"></i> Claro_PostgreSQL_Schema.sql (High-Contrast Theme)</span>
+                <button class="btn-copy" onclick="copiarAlPortapapeles('code-postgres', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Código
+                </button>
+              </div>
+              <pre><code id="code-postgres" class="language-sql">-- ============================================================================
+-- MOTOR: POSTGRESQL 14+ / 16+
+-- ESQUEMA COMPLETO: GESTIÓN DE AVERÍAS CLARO DOMINICANA
+-- ============================================================================
+DROP TABLE IF EXISTS tickets_averias CASCADE;
+DROP TABLE IF EXISTS nodos_distribucion CASCADE;
+DROP TABLE IF EXISTS clientes_telecom CASCADE;
+DROP TABLE IF EXISTS tipos_servicios CASCADE;
+
+CREATE TABLE tipos_servicios (
+    servicio_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    codigo_servicio VARCHAR(20) NOT NULL UNIQUE,
+    descripcion VARCHAR(100) NOT NULL,
+    sla_estandar_horas INT NOT NULL
+);
+
+CREATE TABLE clientes_telecom (
+    cliente_id INT GENERATED ALWAYS AS IDENTITY (START WITH 100000) PRIMARY KEY,
+    identificacion VARCHAR(15) NOT NULL UNIQUE,
+    nombre_completo VARCHAR(150) NOT NULL,
+    telefono_contacto VARCHAR(15) NOT NULL,
+    provincia VARCHAR(50) NOT NULL,
+    municipio VARCHAR(50) NOT NULL,
+    fecha_alta TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE nodos_distribucion (
+    nodo_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    codigo_nodo VARCHAR(30) NOT NULL UNIQUE,
+    sector VARCHAR(80) NOT NULL,
+    tecnologia VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE tickets_averias (
+    ticket_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    numero_incidencia VARCHAR(30) GENERATED ALWAYS AS ('TK-' || ticket_id::TEXT) STORED,
+    cliente_id INT NOT NULL REFERENCES clientes_telecom(cliente_id),
+    servicio_id INT NOT NULL REFERENCES tipos_servicios(servicio_id),
+    nodo_id INT NOT NULL REFERENCES nodos_distribucion(nodo_id),
+    tipo_reclamo VARCHAR(50) NOT NULL,
+    prioridad VARCHAR(15) NOT NULL CHECK (prioridad IN ('Baja', 'Media', 'Alta', 'Critica')),
+    estatus VARCHAR(20) NOT NULL CHECK (estatus IN ('Abierto', 'En Ruta', 'En Pruebas', 'Cerrado', 'Escalado_Indotel')),
+    fecha_apertura TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    fecha_cierre TIMESTAMPTZ NULL,
+    minutos_interrupcion INT DEFAULT 0
+);
+
+CREATE INDEX idx_pg_tickets_estatus_prioridad 
+ON tickets_averias (estatus, prioridad) 
+INCLUDE (servicio_id, nodo_id, minutos_interrupcion, fecha_apertura);
+
+INSERT INTO tipos_servicios (codigo_servicio, descripcion, sla_estandar_horas) VALUES
+('FTTH_GPON', 'Fibra Óptica Residencial', 4),
+('MOVIL_5G', 'Móvil Postpago 5G Ultra', 6),
+('CLARO_TV', 'Televisión Digital Claro TV+', 12),
+('SIP_TRUNK', 'Troncal Enlace Dedicado', 2);
+
+INSERT INTO nodos_distribucion (codigo_nodo, sector, tecnologia) VALUES
+('ND-SD-PIANTINI-01', 'Piantini, Distrito Nacional', 'FTTH-GPON'),
+('ND-SD-BELLAVISTA-02', 'Bella Vista, Distrito Nacional', 'FTTH-GPON'),
+('ND-SD-NACO-03', 'Naco, Distrito Nacional', 'FTTH-GPON'),
+('ND-STI-CENTRO-01', 'Santiago Centro, Santiago', '5G-NR'),
+('ND-HG-BAVARO-01', 'Bávaro, La Altagracia', 'LTE-A');
+
+INSERT INTO clientes_telecom (identificacion, nombre_completo, telefono_contacto, provincia, municipio) VALUES
+('001-1234567-8', 'Juan Carlos Pérez', '809-555-0101', 'Distrito Nacional', 'Santo Domingo'),
+('001-9876543-2', 'María Altagracia Rodríguez', '809-555-0102', 'Distrito Nacional', 'Santo Domingo'),
+('031-4567890-1', 'Pedro Martínez', '829-555-0103', 'Santiago', 'Santiago de los Caballeros'),
+('402-2345678-9', 'Ana Sofía Morales', '849-555-0104', 'La Altagracia', 'Higüey'),
+('001-5544332-1', 'Luis Fernando Gómez', '809-555-0105', 'Distrito Nacional', 'Santo Domingo'),
+('031-9988776-5', 'Carmen Mercedes Peña', '829-555-0106', 'Santiago', 'Santiago de los Caballeros');
+
+INSERT INTO tickets_averias (cliente_id, servicio_id, nodo_id, tipo_reclamo, prioridad, estatus, minutos_interrupcion) VALUES
+(100000, 1, 1, 'Corte Total de Fibra por Obra Metro', 'Critica', 'Abierto', 720),
+(100001, 1, 1, 'Atenuación Severa en OLT', 'Alta', 'En Ruta', 680),
+(100004, 1, 1, 'ONT Sin Sincronismo Óptico', 'Critica', 'Escalado_Indotel', 840),
+(100000, 1, 2, 'Rotura de Splitter Secundario', 'Critica', 'Abierto', 910),
+(100001, 1, 2, 'Fibra Caída por Poste Dañado', 'Alta', 'En Ruta', 950),
+(100004, 1, 2, 'Pérdida de Potencia Óptica', 'Alta', 'Abierto', 450),
+(100002, 2, 4, 'Caída de Portadora 5G Banda 3.5GHz', 'Critica', 'Abierto', 1100),
+(100005, 2, 4, 'Degradación de Throughput Móvil', 'Alta', 'En Ruta', 800),
+(100003, 3, 5, 'Decodificador con Error IPTV-302', 'Media', 'Cerrado', 90),
+(100002, 1, 4, 'Router Reiniciando Continuamente', 'Baja', 'Cerrado', 45);
+
+SELECT 
+    n.codigo_nodo,
+    n.sector,
+    s.descripcion AS nombre_servicio,
+    COUNT(t.ticket_id) AS cantidad_averias,
+    SUM(t.minutos_interrupcion) AS total_minutos_caidos,
+    ROUND(AVG(t.minutos_interrupcion), 2) AS promedio_por_cliente
+FROM tickets_averias t
+JOIN nodos_distribucion n ON t.nodo_id = n.nodo_id
+JOIN tipos_servicios s ON t.servicio_id = s.servicio_id
+WHERE t.estatus IN ('Abierto', 'En Ruta', 'Escalado_Indotel')
+  AND t.prioridad IN ('Alta', 'Critica')
+GROUP BY n.codigo_nodo, n.sector, s.descripcion
+HAVING SUM(t.minutos_interrupcion) > 1000
+ORDER BY total_minutos_caidos DESC
+LIMIT 5;</code></pre>
+            </div>
+
+            <!-- RESULTADO EMULADO POSTGRESQL -->
+            <div class="res-box">
+              <h6 class="fw-bold mb-2">📊 Resultado Emulado en pgAdmin / DBeaver — 3 Filas Devueltas</h6>
+              <table>
+                <thead>
+                  <tr>
+                    <th>codigo_nodo</th>
+                    <th>sector</th>
+                    <th>nombre_servicio</th>
+                    <th>cantidad_averias</th>
+                    <th>total_minutos_caidos</th>
+                    <th>promedio_por_cliente</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ND-SD-BELLAVISTA-02</strong></td>
+                    <td>Bella Vista, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2310</strong></td>
+                    <td>770.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-SD-PIANTINI-01</strong></td>
+                    <td>Piantini, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2240</strong></td>
+                    <td>746.67</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-STI-CENTRO-01</strong></td>
+                    <td>Santiago Centro, Santiago</td>
+                    <td>Móvil Postpago 5G Ultra</td>
+                    <td>2</td>
+                    <td><strong class="text-danger">1900</strong></td>
+                    <td>950.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 3: ORACLE -->
+          <div class="tab-pane fade" id="oracle-pane">
+            <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
+              <h5 class="fw-bold mb-0">Oracle Database 19c / 21c / 23c — Script Completo</h5>
+              <button class="btn btn-sm btn-outline-danger fw-bold" onclick="descargarScriptEspecifico('oracle')">
+                <i class="bi bi-download"></i> Descargar .sql
+              </button>
+            </div>
+
+            <div class="code-container">
+              <div class="code-header">
+                <span class="code-title"><i class="bi bi-filetype-sql"></i> Claro_Oracle_Schema.sql (High-Contrast Theme)</span>
+                <button class="btn-copy" onclick="copiarAlPortapapeles('code-oracle', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Código
+                </button>
+              </div>
+              <pre><code id="code-oracle" class="language-sql">-- ============================================================================
+-- MOTOR: ORACLE DATABASE (12c / 19c / 21c)
+-- ESQUEMA COMPLETO: GESTIÓN DE AVERÍAS CLARO DOMINICANA
+-- ============================================================================
+CREATE TABLE TIPOS_SERVICIOS (
+    SERVICIO_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    CODIGO_SERVICIO VARCHAR2(20) NOT NULL UNIQUE,
+    DESCRIPCION VARCHAR2(100) NOT NULL,
+    SLA_ESTANDAR_HORAS NUMBER(3) NOT NULL
+);
+
+CREATE TABLE CLIENTES_TELECOM (
+    CLIENTE_ID NUMBER GENERATED BY DEFAULT AS IDENTITY (START WITH 100000) PRIMARY KEY,
+    IDENTIFICACION VARCHAR2(15) NOT NULL UNIQUE,
+    NOMBRE_COMPLETO VARCHAR2(150) NOT NULL,
+    TELEFONO_CONTACTO VARCHAR2(15) NOT NULL,
+    PROVINCIA VARCHAR2(50) NOT NULL,
+    MUNICIPIO VARCHAR2(50) NOT NULL,
+    FECHA_ALTA TIMESTAMP DEFAULT SYSTIMESTAMP
+);
+
+CREATE TABLE NODOS_DISTRIBUCION (
+    NODO_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    CODIGO_NODO VARCHAR2(30) NOT NULL UNIQUE,
+    SECTOR VARCHAR2(80) NOT NULL,
+    TECNOLOGIA VARCHAR2(30) NOT NULL
+);
+
+CREATE TABLE TICKETS_AVERIAS (
+    TICKET_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    NUMERO_INCIDENCIA VARCHAR2(30) GENERATED ALWAYS AS ('TK-' || TO_CHAR(TICKET_ID)),
+    CLIENTE_ID NUMBER NOT NULL REFERENCES CLIENTES_TELECOM(CLIENTE_ID),
+    SERVICIO_ID NUMBER NOT NULL REFERENCES TIPOS_SERVICIOS(SERVICIO_ID),
+    NODO_ID NUMBER NOT NULL REFERENCES NODOS_DISTRIBUCION(NODO_ID),
+    TIPO_RECLAMO VARCHAR2(50) NOT NULL,
+    PRIORIDAD VARCHAR2(15) CHECK (PRIORIDAD IN ('Baja', 'Media', 'Alta', 'Critica')),
+    ESTATUS VARCHAR2(20) CHECK (ESTATUS IN ('Abierto', 'En Ruta', 'En Pruebas', 'Cerrado', 'Escalado_Indotel')),
+    FECHA_APERTURA TIMESTAMP DEFAULT SYSTIMESTAMP,
+    FECHA_CIERRE TIMESTAMP NULL,
+    MINUTOS_INTERRUPCION NUMBER(8) DEFAULT 0
+);
+
+CREATE INDEX IX_ORA_TK_ESTATUS_PRIOR ON TICKETS_AVERIAS (ESTATUS, PRIORIDAD, MINUTOS_INTERRUPCION);
+
+INSERT INTO TIPOS_SERVICIOS (CODIGO_SERVICIO, DESCRIPCION, SLA_ESTANDAR_HORAS) VALUES ('FTTH_GPON', 'Fibra Óptica Residencial', 4);
+INSERT INTO TIPOS_SERVICIOS (CODIGO_SERVICIO, DESCRIPCION, SLA_ESTANDAR_HORAS) VALUES ('MOVIL_5G', 'Móvil Postpago 5G Ultra', 6);
+INSERT INTO TIPOS_SERVICIOS (CODIGO_SERVICIO, DESCRIPCION, SLA_ESTANDAR_HORAS) VALUES ('CLARO_TV', 'Televisión Digital Claro TV+', 12);
+INSERT INTO TIPOS_SERVICIOS (CODIGO_SERVICIO, DESCRIPCION, SLA_ESTANDAR_HORAS) VALUES ('SIP_TRUNK', 'Troncal Enlace Dedicado', 2);
+
+INSERT INTO NODOS_DISTRIBUCION (CODIGO_NODO, SECTOR, TECNOLOGIA) VALUES ('ND-SD-PIANTINI-01', 'Piantini, Distrito Nacional', 'FTTH-GPON');
+INSERT INTO NODOS_DISTRIBUCION (CODIGO_NODO, SECTOR, TECNOLOGIA) VALUES ('ND-SD-BELLAVISTA-02', 'Bella Vista, Distrito Nacional', 'FTTH-GPON');
+INSERT INTO NODOS_DISTRIBUCION (CODIGO_NODO, SECTOR, TECNOLOGIA) VALUES ('ND-SD-NACO-03', 'Naco, Distrito Nacional', 'FTTH-GPON');
+INSERT INTO NODOS_DISTRIBUCION (CODIGO_NODO, SECTOR, TECNOLOGIA) VALUES ('ND-STI-CENTRO-01', 'Santiago Centro, Santiago', '5G-NR');
+INSERT INTO NODOS_DISTRIBUCION (CODIGO_NODO, SECTOR, TECNOLOGIA) VALUES ('ND-HG-BAVARO-01', 'Bávaro, La Altagracia', 'LTE-A');
+
+INSERT INTO CLIENTES_TELECOM (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO_CONTACTO, PROVINCIA, MUNICIPIO) VALUES ('001-1234567-8', 'Juan Carlos Pérez', '809-555-0101', 'Distrito Nacional', 'Santo Domingo');
+INSERT INTO CLIENTES_TELECOM (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO_CONTACTO, PROVINCIA, MUNICIPIO) VALUES ('001-9876543-2', 'María Altagracia Rodríguez', '809-555-0102', 'Distrito Nacional', 'Santo Domingo');
+INSERT INTO CLIENTES_TELECOM (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO_CONTACTO, PROVINCIA, MUNICIPIO) VALUES ('031-4567890-1', 'Pedro Martínez', '829-555-0103', 'Santiago', 'Santiago de los Caballeros');
+INSERT INTO CLIENTES_TELECOM (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO_CONTACTO, PROVINCIA, MUNICIPIO) VALUES ('402-2345678-9', 'Ana Sofía Morales', '849-555-0104', 'La Altagracia', 'Higüey');
+INSERT INTO CLIENTES_TELECOM (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO_CONTACTO, PROVINCIA, MUNICIPIO) VALUES ('001-5544332-1', 'Luis Fernando Gómez', '809-555-0105', 'Distrito Nacional', 'Santo Domingo');
+INSERT INTO CLIENTES_TELECOM (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO_CONTACTO, PROVINCIA, MUNICIPIO) VALUES ('031-9988776-5', 'Carmen Mercedes Peña', '829-555-0106', 'Santiago', 'Santiago de los Caballeros');
+
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100000, 1, 1, 'Corte Total de Fibra por Obra Metro', 'Critica', 'Abierto', 720);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100001, 1, 1, 'Atenuación Severa en OLT', 'Alta', 'En Ruta', 680);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100004, 1, 1, 'ONT Sin Sincronismo Óptico', 'Critica', 'Escalado_Indotel', 840);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100000, 1, 2, 'Rotura de Splitter Secundario', 'Critica', 'Abierto', 910);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100001, 1, 2, 'Fibra Caída por Poste Dañado', 'Alta', 'En Ruta', 950);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100004, 1, 2, 'Pérdida de Potencia Óptica', 'Alta', 'Abierto', 450);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100002, 2, 4, 'Caída de Portadora 5G Banda 3.5GHz', 'Critica', 'Abierto', 1100);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100005, 2, 4, 'Degradación de Throughput Móvil', 'Alta', 'En Ruta', 800);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100003, 3, 5, 'Decodificador con Error IPTV-302', 'Media', 'Cerrado', 90);
+INSERT INTO TICKETS_AVERIAS (CLIENTE_ID, SERVICIO_ID, NODO_ID, TIPO_RECLAMO, PRIORIDAD, ESTATUS, MINUTOS_INTERRUPCION) VALUES (100002, 1, 4, 'Router Reiniciando Continuamente', 'Baja', 'Cerrado', 45);
+COMMIT;
+
+SELECT 
+    N.CODIGO_NODO,
+    N.SECTOR,
+    S.DESCRIPCION AS NOMBRE_SERVICIO,
+    COUNT(T.TICKET_ID) AS CANTIDAD_AVERIAS,
+    SUM(T.MINUTOS_INTERRUPCION) AS TOTAL_MINUTOS_CAIDOS,
+    ROUND(AVG(T.MINUTOS_INTERRUPCION), 2) AS PROMEDIO_POR_CLIENTE
+FROM TICKETS_AVERIAS T
+JOIN NODOS_DISTRIBUCION N ON T.NODO_ID = N.NODO_ID
+JOIN TIPOS_SERVICIOS S ON T.SERVICIO_ID = S.SERVICIO_ID
+WHERE T.ESTATUS IN ('Abierto', 'En Ruta', 'Escalado_Indotel')
+  AND T.PRIORIDAD IN ('Alta', 'Critica')
+GROUP BY N.CODIGO_NODO, N.SECTOR, S.DESCRIPCION
+HAVING SUM(T.MINUTOS_INTERRUPCION) > 1000
+ORDER BY TOTAL_MINUTOS_CAIDOS DESC
+FETCH FIRST 5 ROWS ONLY;</code></pre>
+            </div>
+
+            <!-- RESULTADO EMULADO ORACLE -->
+            <div class="res-box">
+              <h6 class="fw-bold mb-2">📊 Resultado Emulado en Oracle SQL Developer — Mayúsculas ANSI</h6>
+              <table>
+                <thead>
+                  <tr>
+                    <th>CODIGO_NODO</th>
+                    <th>SECTOR</th>
+                    <th>NOMBRE_SERVICIO</th>
+                    <th>CANTIDAD_AVERIAS</th>
+                    <th>TOTAL_MINUTOS_CAIDOS</th>
+                    <th>PROMEDIO_POR_CLIENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ND-SD-BELLAVISTA-02</strong></td>
+                    <td>Bella Vista, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2310</strong></td>
+                    <td>770.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-SD-PIANTINI-01</strong></td>
+                    <td>Piantini, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2240</strong></td>
+                    <td>746.67</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-STI-CENTRO-01</strong></td>
+                    <td>Santiago Centro, Santiago</td>
+                    <td>Móvil Postpago 5G Ultra</td>
+                    <td>2</td>
+                    <td><strong class="text-danger">1900</strong></td>
+                    <td>950.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 4: MYSQL -->
+          <div class="tab-pane fade" id="mysql-pane">
+            <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
+              <h5 class="fw-bold mb-0">MySQL 8.0+ — Script InnoDB Completo</h5>
+              <button class="btn btn-sm btn-outline-danger fw-bold" onclick="descargarScriptEspecifico('mysql')">
+                <i class="bi bi-download"></i> Descargar .sql
+              </button>
+          <button class="btn btn-warning border-2 border-dark fw-bold d-flex align-items-center gap-2" onclick="descargarScriptEspecifico('massive')">
+            <i class="bi bi-database-fill-gear"></i> Inserción Masiva 1,000+ (.sql)
+          </button>
+            </div>
+
+            <div class="code-container">
+              <div class="code-header">
+                <span class="code-title"><i class="bi bi-filetype-sql"></i> Claro_MySQL_Schema.sql (High-Contrast Theme)</span>
+                <button class="btn-copy" onclick="copiarAlPortapapeles('code-mysql', this)">
+                  <i class="bi bi-clipboard"></i> Copiar Código
+                </button>
+              </div>
+              <pre><code id="code-mysql" class="language-sql">-- ============================================================================
+-- MOTOR: MYSQL 8.0+ (STORAGE ENGINE INNODB)
+-- ESQUEMA COMPLETO: GESTIÓN DE AVERÍAS CLARO DOMINICANA
+-- ============================================================================
+CREATE DATABASE IF NOT EXISTS claro_ops_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE claro_ops_db;
+
+CREATE TABLE IF NOT EXISTS tipos_servicios (
+    servicio_id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_servicio VARCHAR(20) NOT NULL UNIQUE,
+    descripcion VARCHAR(100) NOT NULL,
+    sla_estandar_horas INT NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS clientes_telecom (
+    cliente_id INT AUTO_INCREMENT PRIMARY KEY,
+    identificacion VARCHAR(15) NOT NULL UNIQUE,
+    nombre_completo VARCHAR(150) NOT NULL,
+    telefono_contacto VARCHAR(15) NOT NULL,
+    provincia VARCHAR(50) NOT NULL,
+    municipio VARCHAR(50) NOT NULL,
+    fecha_alta DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=100000;
+
+CREATE TABLE IF NOT EXISTS nodos_distribucion (
+    nodo_id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_nodo VARCHAR(30) NOT NULL UNIQUE,
+    sector VARCHAR(80) NOT NULL,
+    tecnologia VARCHAR(30) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS tickets_averias (
+    ticket_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    servicio_id INT NOT NULL,
+    nodo_id INT NOT NULL,
+    tipo_reclamo VARCHAR(50) NOT NULL,
+    prioridad ENUM('Baja', 'Media', 'Alta', 'Critica') NOT NULL,
+    estatus ENUM('Abierto', 'En Ruta', 'En Pruebas', 'Cerrado', 'Escalado_Indotel') NOT NULL,
+    fecha_apertura DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_cierre DATETIME NULL,
+    minutos_interrupcion INT DEFAULT 0,
+    CONSTRAINT fk_my_cliente FOREIGN KEY (cliente_id) REFERENCES clientes_telecom(cliente_id),
+    CONSTRAINT fk_my_servicio FOREIGN KEY (servicio_id) REFERENCES tipos_servicios(servicio_id),
+    CONSTRAINT fk_my_nodo FOREIGN KEY (nodo_id) REFERENCES nodos_distribucion(nodo_id)
+) ENGINE=InnoDB;
+
+CREATE INDEX idx_my_tickets_estatus_prior ON tickets_averias(estatus, prioridad);
+
+CREATE OR REPLACE VIEW vw_tickets_averias AS
+SELECT t.*, CONCAT('TK-', t.ticket_id) AS numero_incidencia
+FROM tickets_averias t;
+
+INSERT INTO tipos_servicios (codigo_servicio, descripcion, sla_estandar_horas) VALUES
+('FTTH_GPON', 'Fibra Óptica Residencial', 4),
+('MOVIL_5G', 'Móvil Postpago 5G Ultra', 6),
+('CLARO_TV', 'Televisión Digital Claro TV+', 12),
+('SIP_TRUNK', 'Troncal Enlace Dedicado', 2);
+
+INSERT INTO nodos_distribucion (codigo_nodo, sector, tecnologia) VALUES
+('ND-SD-PIANTINI-01', 'Piantini, Distrito Nacional', 'FTTH-GPON'),
+('ND-SD-BELLAVISTA-02', 'Bella Vista, Distrito Nacional', 'FTTH-GPON'),
+('ND-SD-NACO-03', 'Naco, Distrito Nacional', 'FTTH-GPON'),
+('ND-STI-CENTRO-01', 'Santiago Centro, Santiago', '5G-NR'),
+('ND-HG-BAVARO-01', 'Bávaro, La Altagracia', 'LTE-A');
+
+INSERT INTO clientes_telecom (identificacion, nombre_completo, telefono_contacto, provincia, municipio) VALUES
+('001-1234567-8', 'Juan Carlos Pérez', '809-555-0101', 'Distrito Nacional', 'Santo Domingo'),
+('001-9876543-2', 'María Altagracia Rodríguez', '809-555-0102', 'Distrito Nacional', 'Santo Domingo'),
+('031-4567890-1', 'Pedro Martínez', '829-555-0103', 'Santiago', 'Santiago de los Caballeros'),
+('402-2345678-9', 'Ana Sofía Morales', '849-555-0104', 'La Altagracia', 'Higüey'),
+('001-5544332-1', 'Luis Fernando Gómez', '809-555-0105', 'Distrito Nacional', 'Santo Domingo'),
+('031-9988776-5', 'Carmen Mercedes Peña', '829-555-0106', 'Santiago', 'Santiago de los Caballeros');
+
+INSERT INTO tickets_averias (cliente_id, servicio_id, nodo_id, tipo_reclamo, prioridad, estatus, minutos_interrupcion) VALUES
+(100000, 1, 1, 'Corte Total de Fibra por Obra Metro', 'Critica', 'Abierto', 720),
+(100001, 1, 1, 'Atenuación Severa en OLT', 'Alta', 'En Ruta', 680),
+(100004, 1, 1, 'ONT Sin Sincronismo Óptico', 'Critica', 'Escalado_Indotel', 840),
+(100000, 1, 2, 'Rotura de Splitter Secundario', 'Critica', 'Abierto', 910),
+(100001, 1, 2, 'Fibra Caída por Poste Dañado', 'Alta', 'En Ruta', 950),
+(100004, 1, 2, 'Pérdida de Potencia Óptica', 'Alta', 'Abierto', 450),
+(100002, 2, 4, 'Caída de Portadora 5G Banda 3.5GHz', 'Critica', 'Abierto', 1100),
+(100005, 2, 4, 'Degradación de Throughput Móvil', 'Alta', 'En Ruta', 800),
+(100003, 3, 5, 'Decodificador con Error IPTV-302', 'Media', 'Cerrado', 90),
+(100002, 1, 4, 'Router Reiniciando Continuamente', 'Baja', 'Cerrado', 45);
+
+SELECT 
+    n.codigo_nodo,
+    n.sector,
+    s.descripcion AS nombre_servicio,
+    COUNT(t.ticket_id) AS cantidad_averias,
+    SUM(t.minutos_interrupcion) AS total_minutos_caidos,
+    ROUND(AVG(t.minutos_interrupcion), 2) AS promedio_por_cliente
+FROM tickets_averias t
+INNER JOIN nodos_distribucion n ON t.nodo_id = n.nodo_id
+INNER JOIN tipos_servicios s ON t.servicio_id = s.servicio_id
+WHERE t.estatus IN ('Abierto', 'En Ruta', 'Escalado_Indotel')
+  AND t.prioridad IN ('Alta', 'Critica')
+GROUP BY n.codigo_nodo, n.sector, s.descripcion
+HAVING SUM(t.minutos_interrupcion) > 1000
+ORDER BY total_minutos_caidos DESC
+LIMIT 5;</code></pre>
+            </div>
+
+            <!-- RESULTADO EMULADO MYSQL -->
+            <div class="res-box">
+              <h6 class="fw-bold mb-2">📊 Resultado Emulado en MySQL Workbench</h6>
+              <table>
+                <thead>
+                  <tr>
+                    <th>codigo_nodo</th>
+                    <th>sector</th>
+                    <th>nombre_servicio</th>
+                    <th>cantidad_averias</th>
+                    <th>total_minutos_caidos</th>
+                    <th>promedio_por_cliente</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ND-SD-BELLAVISTA-02</strong></td>
+                    <td>Bella Vista, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2310</strong></td>
+                    <td>770.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-SD-PIANTINI-01</strong></td>
+                    <td>Piantini, Distrito Nacional</td>
+                    <td>Fibra Óptica Residencial</td>
+                    <td>3</td>
+                    <td><strong class="text-danger">2240</strong></td>
+                    <td>746.67</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ND-STI-CENTRO-01</strong></td>
+                    <td>Santiago Centro, Santiago</td>
+                    <td>Móvil Postpago 5G Ultra</td>
+                    <td>2</td>
+                    <td><strong class="text-danger">1900</strong></td>
+                    <td>950.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: VISTAS Y AUDITORÍA INDOTEL -->
+    <section id="vistas" class="mb-5">
+      <div class="content-card">
+        <span class="badge-soft-red mb-2 d-inline-block">⚖️ Fiscalización Legal de Telecomunicaciones</span>
+        <h2 class="h2 fw-bold mb-3">Vista de Monitoreo Crítico ante INDOTEL</h2>
+        <p class="mb-3">La siguiente vista calcula en vivo las horas de indisponibilidad y genera alertas condicionales para casos fuera del SLA regulado:</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-title"><i class="bi bi-eye-fill"></i> Vw_MonitorSLA_IncidenciasCriticas.sql (High-Contrast Theme)</span>
+            <button class="btn-copy" onclick="copiarAlPortapapeles('code-views', this)">
+              <i class="bi bi-clipboard"></i> Copiar Código
+            </button>
+          </div>
+          <pre><code id="code-views" class="language-sql">CREATE OR ALTER VIEW vw_MonitorSLA_IncidenciasCriticas AS
+SELECT 
+    T.NumeroIncidencia,
+    C.NombreCompleto AS Cliente,
+    C.Provincia,
+    N.CodigoNodo,
+    N.Sector,
+    S.Descripcion AS Servicio,
+    S.SLA_EstandarHoras,
+    ROUND(CAST(T.MinutosInterrupcion AS FLOAT) / 60.0, 2) AS HorasInterrupcionActual,
+    CASE 
+        WHEN (T.MinutosInterrupcion / 60.0) > S.SLA_EstandarHoras THEN 'VIOLACIÓN DE SLA (ALERTA INDOTEL)'
+        WHEN (T.MinutosInterrupcion / 60.0) >= (S.SLA_EstandarHoras * 0.75) THEN 'RIESGO INMINENTE (>75% SLA)'
+        ELSE 'DENTRO DE PARÁMETROS'
+    END AS EstadoCumplimiento,
+    T.Prioridad,
+    T.Estatus
+FROM TicketsAverias T
+INNER JOIN ClientesTelecom C ON T.ClienteID = C.ClienteID
+INNER JOIN NodosDistribucion N ON T.NodoID = N.NodoID
+INNER JOIN TiposServicios S ON T.ServicioID = S.ServicioID
+WHERE T.Estatus NOT IN ('Cerrado');
+GO
+
+SELECT * FROM vw_MonitorSLA_IncidenciasCriticas ORDER BY HorasInterrupcionActual DESC;
+GO</code></pre>
+        </div>
+
+        <!-- RESULTADO DE LA VISTA CON ALERTAS CONDICIONALES -->
+        <div class="res-box">
+          <h6 class="fw-bold mb-2">🚨 Resultado Emulado: Cuadrícula de Auditoría INDOTEL (8 Tickets Activos)</h6>
+          <table>
+            <thead>
+              <tr>
+                <th>NumeroIncidencia</th>
+                <th>Cliente</th>
+                <th>Sector</th>
+                <th>Servicio</th>
+                <th>HorasInterrupcion</th>
+                <th>SLA_Horas</th>
+                <th>EstadoCumplimiento</th>
+                <th>Prioridad</th>
+                <th>Estatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>TK-7</strong></td>
+                <td>Pedro Martínez</td>
+                <td>Santiago Centro, Santiago</td>
+                <td>Móvil Postpago 5G Ultra</td>
+                <td><strong class="text-danger">18.33 h</strong></td>
+                <td>6 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Critica</span></td>
+                <td>Abierto</td>
+              </tr>
+              <tr>
+                <td><strong>TK-5</strong></td>
+                <td>María Altagracia Rodríguez</td>
+                <td>Bella Vista, Distrito Nacional</td>
+                <td>Fibra Óptica Residencial</td>
+                <td><strong class="text-danger">15.83 h</strong></td>
+                <td>4 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Alta</span></td>
+                <td>En Ruta</td>
+              </tr>
+              <tr>
+                <td><strong>TK-4</strong></td>
+                <td>Juan Carlos Pérez</td>
+                <td>Bella Vista, Distrito Nacional</td>
+                <td>Fibra Óptica Residencial</td>
+                <td><strong class="text-danger">15.17 h</strong></td>
+                <td>4 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Critica</span></td>
+                <td>Abierto</td>
+              </tr>
+              <tr>
+                <td><strong>TK-3</strong></td>
+                <td>Luis Fernando Gómez</td>
+                <td>Piantini, Distrito Nacional</td>
+                <td>Fibra Óptica Residencial</td>
+                <td><strong class="text-danger">14.00 h</strong></td>
+                <td>4 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Critica</span></td>
+                <td>Escalado_Indotel</td>
+              </tr>
+              <tr>
+                <td><strong>TK-8</strong></td>
+                <td>Carmen Mercedes Peña</td>
+                <td>Santiago Centro, Santiago</td>
+                <td>Móvil Postpago 5G Ultra</td>
+                <td><strong class="text-danger">13.33 h</strong></td>
+                <td>6 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Alta</span></td>
+                <td>En Ruta</td>
+              </tr>
+              <tr>
+                <td><strong>TK-1</strong></td>
+                <td>Juan Carlos Pérez</td>
+                <td>Piantini, Distrito Nacional</td>
+                <td>Fibra Óptica Residencial</td>
+                <td><strong class="text-danger">12.00 h</strong></td>
+                <td>4 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Critica</span></td>
+                <td>Abierto</td>
+              </tr>
+              <tr>
+                <td><strong>TK-2</strong></td>
+                <td>María Altagracia Rodríguez</td>
+                <td>Piantini, Distrito Nacional</td>
+                <td>Fibra Óptica Residencial</td>
+                <td><strong class="text-danger">11.33 h</strong></td>
+                <td>4 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Alta</span></td>
+                <td>En Ruta</td>
+              </tr>
+              <tr>
+                <td><strong>TK-6</strong></td>
+                <td>Luis Fernando Gómez</td>
+                <td>Bella Vista, Distrito Nacional</td>
+                <td>Fibra Óptica Residencial</td>
+                <td><strong class="text-danger">7.50 h</strong></td>
+                <td>4 h</td>
+                <td><span class="sla-bad">🚨 VIOLACIÓN DE SLA (ALERTA INDOTEL)</span></td>
+                <td><span class="badge bg-danger">Alta</span></td>
+                <td>Abierto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    
+
+    
+    <!-- =========================================================================
+         NUEVA SECCIÓN: SCRIPT ADICIONAL DE INSERCIÓN MASIVA (DATA SEEDER)
+    ========================================================================== -->
+    
+    
+
+    <section id="carga-masiva-seccion" class="content-card">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4 border-bottom border-2 border-dark pb-3">
+        <div>
+          <span class="badge bg-warning text-dark border border-dark mb-2">🚀 Script Adicional Requerido</span>
+          <h2 class="h3 fw-bold mb-1" style="font-family: 'Space Grotesk', sans-serif;">
+            Generador de Inserción Masiva &amp; Estrés Relacional (Data Seeder)
+          </h2>
+          <p class="text-secondary mb-0 small">
+            <strong>Nota Importante:</strong> Este script es adicional e independiente al pipeline base. Puebla la base de datos con <strong>1,000+ tickets</strong>, <strong>250+ clientes</strong> y expedientes INDOTEL para prácticas avanzadas.
+          </p>
+        </div>
+        
+        <!-- Selector de Motor Sincronizado para Carga Masiva -->
+        <div class="d-flex flex-wrap align-items-center gap-2">
+          <div class="btn-group border border-2 border-dark rounded-2 overflow-hidden shadow-sm" role="group" aria-label="Selector de Motor">
+            <button type="button" class="btn btn-sm btn-dark motor-sync-btn active" data-motor="sqlserver" onclick="window.cambiarMotorGlobal('sqlserver')">SQL Server</button>
+            <button type="button" class="btn btn-sm btn-outline-dark motor-sync-btn" data-motor="postgres" onclick="window.cambiarMotorGlobal('postgres')">PostgreSQL</button>
+            <button type="button" class="btn btn-sm btn-outline-dark motor-sync-btn" data-motor="oracle" onclick="window.cambiarMotorGlobal('oracle')">Oracle</button>
+            <button type="button" class="btn btn-sm btn-outline-dark motor-sync-btn" data-motor="mysql" onclick="window.cambiarMotorGlobal('mysql')">MySQL</button>
+          </div>
+          <button class="btn btn-sm btn-outline-dark border-2 fw-bold d-flex align-items-center gap-1" onclick="copiarAlPortapapeles('code-massive-insert', this)">
+            <i class="bi bi-clipboard"></i> Copiar
+          </button>
+          <button class="btn btn-sm btn-claro d-flex align-items-center gap-1" onclick="descargarScriptEspecifico('massive')">
+            <i class="bi bi-download"></i> Descargar Masivo
+          </button>
+          <button class="btn btn-sm btn-dark border-2 border-dark fw-bold d-flex align-items-center gap-1" onclick="descargarScriptTodoEnUno(window.motorActivo)">
+            <i class="bi bi-file-earmark-zip-fill text-warning"></i> Todo-en-Uno (.sql)
+          </button>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="p-3 bg-light border border-2 border-dark rounded-3 text-center" style="box-shadow: 3px 3px 0 #000;">
+            <div class="display-6 fw-bold text-danger">250+</div>
+            <div class="small fw-bold text-dark">Clientes Sintéticos</div>
+            <div class="text-muted" style="font-size: 0.75rem;">Cédulas y Teléfonos RD válidos</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="p-3 bg-light border border-2 border-dark rounded-3 text-center" style="box-shadow: 3px 3px 0 #000;">
+            <div class="display-6 fw-bold text-primary">1,000</div>
+            <div class="small fw-bold text-dark">Tickets de Averías</div>
+            <div class="text-muted" style="font-size: 0.75rem;">Tiempos reales con varianza SLA</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="p-3 bg-light border border-2 border-dark rounded-3 text-center" style="box-shadow: 3px 3px 0 #000;">
+            <div class="display-6 fw-bold text-success">250</div>
+            <div class="small fw-bold text-dark">Contratos & IPs</div>
+            <div class="text-muted" style="font-size: 0.75rem;">Planes Fibra, Móvil y Troncales</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="p-3 bg-light border border-2 border-dark rounded-3 text-center" style="box-shadow: 3px 3px 0 #000;">
+            <div class="display-6 fw-bold text-dark">100%</div>
+            <div class="small fw-bold text-dark">Integridad Relacional</div>
+            <div class="text-muted" style="font-size: 0.75rem;">Expedientes INDOTEL auditables</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="position-relative">
+        <pre class="m-0 rounded-3 border border-2 border-dark" style="max-height: 480px; overflow-y: auto; background: #1a1a1a !important;"><code id="code-massive-insert" class="language-sql">-- ====================================================================================================
+-- PROYECTO: CLARO DOMINICANA TELECOM - MASTERCLASS MULTI-MOTOR
+-- SCRIPT ADICIONAL: GENERADOR DE CARGA MASIVA DE DATOS SINTÉTICOS (DATA SEEDER)
+-- AUTOR: ING. JUANCITO PEÑA | CEO DataIADev.com
+-- PROPÓSITO: Poblar la base de datos con cientos de registros relacionales para prácticas de analítica
+--            avanzada, estrés de índices, análisis de planes de ejecución y auditorías INDOTEL.
+-- ====================================================================================================
+
+-- 1. SELECCIÓN DE BASE DE DATOS (Asegúrate de haber ejecutado antes el script base DDL)
+-- USE Claro_Telecom_Audit;
+-- GO
+
+PRINT '>>> INICIANDO PIPELINE DE CARGA MASIVA RELACIONAL...';
+SET NOCOUNT ON;
+
+-- ----------------------------------------------------------------------------------------------------
+-- A. TABLA TEMPORAL CON SEMILLAS DE CLIENTES DOMINICANOS REALISTAS
+-- ----------------------------------------------------------------------------------------------------
+IF OBJECT_ID('tempdb..#Nombres') IS NOT NULL DROP TABLE #Nombres;
+IF OBJECT_ID('tempdb..#Apellidos') IS NOT NULL DROP TABLE #Apellidos;
+IF OBJECT_ID('tempdb..#Sectores') IS NOT NULL DROP TABLE #Sectores;
+
+CREATE TABLE #Nombres (Nombre VARCHAR(50));
+INSERT INTO #Nombres VALUES 
+('Juan'), ('Pedro'), ('María'), ('Ana'), ('Carlos'), ('José'), ('Luis'), ('Rosa'), 
+('Miguel'), ('Carmen'), ('Francisco'), ('Altagracia'), ('Manuel'), ('Juana'), ('Ramón'),
+('Mercedes'), ('Rafael'), ('Esperanza'), ('Eduardo'), ('Yomaira'), ('Kelvin'), ('Patricia'),
+('Ángel'), ('Yudelka'), ('Héctor'), ('Deyanira'), ('Alejandro'), ('Gissel'), ('Roberto');
+
+CREATE TABLE #Apellidos (Apellido VARCHAR(50));
+INSERT INTO #Apellidos VALUES 
+('Peña'), ('Rodríguez'), ('Pérez'), ('Gómez'), ('Martínez'), ('García'), ('Reyes'),
+('Díaz'), ('Hernández'), ('Sánchez'), ('Ramírez'), ('Cruz'), ('Morales'), ('Fernández'),
+('Jiménez'), ('Rosario'), ('Castillo'), ('Vargas'), ('Batista'), ('De la Cruz'), ('Mejía');
+
+CREATE TABLE #Sectores (Sector VARCHAR(100), Provincia VARCHAR(50), TipoZona VARCHAR(30));
+INSERT INTO #Sectores VALUES 
+('Piantini', 'Distrito Nacional', 'Urbana VIP'),
+('Bella Vista', 'Distrito Nacional', 'Urbana Residencial'),
+('Gazcue', 'Distrito Nacional', 'Urbana Histórica'),
+('Naco', 'Distrito Nacional', 'Urbana VIP'),
+('Ensanche La Fe', 'Distrito Nacional', 'Urbana Comercial'),
+('Villa Mella', 'Santo Domingo Norte', 'Sub-Urbana'),
+('Herrera', 'Santo Domingo Oeste', 'Industrial / Comercial'),
+('Alma Rosa I', 'Santo Domingo Este', 'Urbana Residencial'),
+('Los Mina', 'Santo Domingo Este', 'Urbana Alta Densidad'),
+('Cerros de Gurabo', 'Santiago', 'Urbana VIP'),
+('Villa Olga', 'Santiago', 'Urbana Residencial'),
+('Cienfuegos', 'Santiago', 'Sub-Urbana'),
+('El Vedado', 'La Vega', 'Urbana Residencial'),
+('Centro Ciudad', 'San Cristóbal', 'Comercial'),
+('Bávaro', 'La Altagracia', 'Turística / Comercial'),
+('Punta Cana', 'La Altagracia', 'Turística VIP'),
+('La Romana Centro', 'La Romana', 'Comercial / Portuaria'),
+('San Pedro Centro', 'San Pedro de Macorís', 'Industrial'),
+('Puerto Plata Malecón', 'Puerto Plata', 'Turística'),
+('Baní Centro', 'Peravia', 'Agro-Industrial');
+
+-- ----------------------------------------------------------------------------------------------------
+-- B. INSERCIÓN MASIVA DE CLIENTES (250 CLIENTES ADICIONALES)
+-- ----------------------------------------------------------------------------------------------------
+PRINT '>>> 1/4 Insertando 250 Clientes con Cédulas y Segmentos Válidos...';
+
+DECLARE @i INT = 1;
+DECLARE @TotalClientes INT = 250;
+DECLARE @RandomNombre VARCHAR(50), @RandomApellido VARCHAR(50), @NombreCompleto VARCHAR(120);
+DECLARE @RandomSector VARCHAR(100), @RandomProvincia VARCHAR(50), @RandomSegmento VARCHAR(20);
+DECLARE @CedulaSimulada VARCHAR(15), @TelefonoSimulado VARCHAR(15), @EmailSimulado VARCHAR(120);
+
+WHILE @i <= @TotalClientes
+BEGIN
+    SELECT TOP 1 @RandomNombre = Nombre FROM #Nombres ORDER BY NEWID();
+    SELECT TOP 1 @RandomApellido = Apellido FROM #Apellidos ORDER BY NEWID();
+    SELECT TOP 1 @RandomSector = Sector, @RandomProvincia = Provincia FROM #Sectores ORDER BY NEWID();
+
+    SET @NombreCompleto = @RandomNombre + ' ' + @RandomApellido;
+    SET @CedulaSimulada = '001-' + RIGHT('0000000' + CAST(FLOOR(RAND() * 8999999 + 1000000) AS VARCHAR(10)), 7) + '-' + CAST(FLOOR(RAND() * 9 + 1) AS VARCHAR(1));
+    SET @TelefonoSimulado = '809-' + RIGHT('000' + CAST(FLOOR(RAND() * 899 + 100) AS VARCHAR(5)), 3) + '-' + RIGHT('0000' + CAST(FLOOR(RAND() * 8999 + 1000) AS VARCHAR(6)), 4);
+    SET @EmailSimulado = LOWER(REPLACE(@RandomNombre, ' ', '')) + '.' + LOWER(REPLACE(@RandomApellido, ' ', '')) + CAST(@i AS VARCHAR(5)) + '@claro.com.do';
+    
+    SET @RandomSegmento = CASE 
+        WHEN @i % 7 = 0 THEN 'Corporativo VIP'
+        WHEN @i % 4 = 0 THEN 'PYME Negocios'
+        WHEN @i % 3 = 0 THEN 'Residencial Premium'
+        ELSE 'Residencial Estándar'
+    END;
+
+    INSERT INTO Clientes (Nombre_Completo, Documento_Identidad, Telefono_Contacto, Correo_Electronico, Direccion_Instalacion, Provincia, Segmento_Cliente, Fecha_Registro)
+    VALUES (
+        @NombreCompleto,
+        @CedulaSimulada,
+        @TelefonoSimulado,
+        @EmailSimulado,
+        'Calle ' + CAST((@i * 3 + 12) AS VARCHAR(5)) + ' #' + CAST((@i + 5) AS VARCHAR(4)) + ', ' + @RandomSector,
+        @RandomProvincia,
+        @RandomSegmento,
+        DATEADD(DAY, -FLOOR(RAND() * 730 + 30), GETDATE())
+    );
+
+    SET @i = @i + 1;
+END;
+
+-- ----------------------------------------------------------------------------------------------------
+-- C. ASIGNACIÓN MASIVA DE CONTRATOS Y PLANES (FIBRA, MÓVIL, CORPORATIVO)
+-- ----------------------------------------------------------------------------------------------------
+PRINT '>>> 2/4 Creando Contratos Activos y Planes de Servicio...';
+
+INSERT INTO Contratos (ID_Cliente, ID_Plan, Numero_Contrato, Fecha_Firma, Estado_Contrato, Tarifa_Mensual, Direccion_IP_Asignada)
+SELECT 
+    C.ID_Cliente,
+    (ABS(CHECKSUM(NEWID())) % 4) + 1 AS ID_Plan,
+    'CTR-CLARO-' + RIGHT('000000' + CAST(C.ID_Cliente AS VARCHAR(10)), 6),
+    DATEADD(DAY, 2, C.Fecha_Registro),
+    CASE WHEN C.ID_Cliente % 15 = 0 THEN 'Suspendido' ELSE 'Activo' END,
+    CASE 
+        WHEN C.Segmento_Cliente = 'Corporativo VIP' THEN 8500.00
+        WHEN C.Segmento_Cliente = 'PYME Negocios' THEN 4200.00
+        WHEN C.Segmento_Cliente = 'Residencial Premium' THEN 2895.00
+        ELSE 1595.00
+    END,
+    '10.240.' + CAST(ABS(CHECKSUM(NEWID())) % 254 + 1 AS VARCHAR(3)) + '.' + CAST(ABS(CHECKSUM(NEWID())) % 254 + 1 AS VARCHAR(3))
+FROM Clientes C
+WHERE NOT EXISTS (SELECT 1 FROM Contratos X WHERE X.ID_Cliente = C.ID_Cliente);
+
+-- ----------------------------------------------------------------------------------------------------
+-- D. GENERACIÓN DE 1,000 TICKETS DE AVERÍA / INCIDENCIAS DE RED
+-- ----------------------------------------------------------------------------------------------------
+PRINT '>>> 3/4 Generando 1,000 Tickets con Tiempos de Solución y Severidades Variadas...';
+
+IF OBJECT_ID('tempdb..#TiposAveria') IS NOT NULL DROP TABLE #TiposAveria;
+CREATE TABLE #TiposAveria (ID INT IDENTITY(1,1), Descripcion VARCHAR(150), Categoria VARCHAR(50), SLA_Horas_Base INT);
+INSERT INTO #TiposAveria VALUES 
+('Corte de Fibra Óptica por Obra Civil', 'Infraestructura', 4),
+('Falla de Potencia Óptica en OLT / Splitter', 'Red Acceso', 6),
+('Pérdida de Sincronismo ONT / Módem', 'Equipos CPE', 12),
+('Degradación de Latencia y Jitter en Enlace Troncal', 'Core IP / MPLS', 4),
+('Bloqueo de Puertos por Ataque DDoS detectado', 'Ciberseguridad', 2),
+('Falla de Energía en Radiobase Celular', 'Móvil 5G/LTE', 3),
+('Intermitencia de Señal en Zona Residencial', 'Acceso Inalámbrico', 8),
+('Reemplazo de Router Wi-Fi 6 averiado', 'Soporte Domiciliario', 24);
+
+DECLARE @t INT = 1;
+DECLARE @TotalTickets INT = 1000;
+DECLARE @ClienteID INT, @TipoAveriaID INT, @FechaApertura DATETIME, @FechaCierre DATETIME;
+DECLARE @DuracionHoras DECIMAL(8,2), @SLA_Target INT, @EstadoTicket VARCHAR(20), @Prioridad VARCHAR(20);
+DECLARE @DescripAveria VARCHAR(200);
+
+WHILE @t <= @TotalTickets
+BEGIN
+    SELECT TOP 1 @ClienteID = ID_Cliente FROM Clientes ORDER BY NEWID();
+    SELECT TOP 1 @TipoAveriaID = ID, @DescripAveria = Descripcion, @SLA_Target = SLA_Horas_Base FROM #TiposAveria ORDER BY NEWID();
+    
+    -- Fecha de apertura en los últimos 180 días
+    SET @FechaApertura = DATEADD(MINUTE, -FLOOR(RAND() * 259200), GETDATE());
+
+    -- Estado del ticket y tiempos simulados
+    IF @t % 10 = 0 
+    BEGIN
+        SET @EstadoTicket = 'Abierto';
+        SET @FechaCierre = NULL;
+        SET @DuracionHoras = CAST(DATEDIFF(MINUTE, @FechaApertura, GETDATE()) / 60.0 AS DECIMAL(8,2));
+    END
+    ELSE IF @t % 12 = 0
+    BEGIN
+        SET @EstadoTicket = 'En Ruta';
+        SET @FechaCierre = NULL;
+        SET @DuracionHoras = CAST(DATEDIFF(MINUTE, @FechaApertura, GETDATE()) / 60.0 AS DECIMAL(8,2));
+    END
+    ELSE
+    BEGIN
+        SET @EstadoTicket = 'Resuelto';
+        -- Duración aleatoria entre 0.5 y 48 horas (algunos violarán SLA para INDOTEL)
+        SET @DuracionHoras = CAST((RAND() * 28.0 + 0.5) AS DECIMAL(8,2));
+        SET @FechaCierre = DATEADD(MINUTE, CAST(@DuracionHoras * 60 AS INT), @FechaApertura);
+    END;
+
+    SET @Prioridad = CASE 
+        WHEN @t % 7 = 0 THEN 'Critica'
+        WHEN @t % 3 = 0 THEN 'Alta'
+        WHEN @t % 2 = 0 THEN 'Media'
+        ELSE 'Baja'
+    END;
+
+    INSERT INTO Tickets_Averias (
+        Codigo_Ticket, 
+        ID_Cliente, 
+        Categoria_Incidencia, 
+        Descripcion_Falla, 
+        Prioridad, 
+        Estado_Ticket, 
+        Fecha_Apertura, 
+        Fecha_Cierre, 
+        Tiempo_Resolucion_Horas, 
+        SLA_Compromiso_Horas,
+        Tecnico_Asignado
+    )
+    VALUES (
+        'TK-MAS-' + RIGHT('000000' + CAST(@t AS VARCHAR(10)), 6),
+        @ClienteID,
+        'Telecomunicaciones',
+        @DescripAveria,
+        @Prioridad,
+        @EstadoTicket,
+        @FechaApertura,
+        @FechaCierre,
+        @DuracionHoras,
+        @SLA_Target,
+        'Técnico Cuadrilla #' + CAST((@t % 18 + 1) AS VARCHAR(3))
+    );
+
+    SET @t = @t + 1;
+END;
+
+-- ----------------------------------------------------------------------------------------------------
+-- E. POBLAR AUDITORÍAS REGULATORIAS INDOTEL
+-- ----------------------------------------------------------------------------------------------------
+PRINT '>>> 4/4 Evaluando y Registrando Auditorías INDOTEL para Violaciones de SLA...';
+
+INSERT INTO Auditoria_Regulatoria_INDOTEL (
+    ID_Ticket,
+    Codigo_Resolucion,
+    Fecha_Fiscalizacion,
+    SLA_Normativo_Horas,
+    SLA_Real_Horas,
+    Veredicto_Regulatorio,
+    Monto_Penalidad_DOP,
+    Inspector_Asignado,
+    Estado_Expediente
+)
+SELECT 
+    T.ID_Ticket,
+    'RES-INDOTEL-' + FORMAT(T.Fecha_Apertura, 'yyyyMM') + '-' + RIGHT('0000' + CAST(T.ID_Ticket AS VARCHAR(10)), 5),
+    DATEADD(DAY, 1, COALESCE(T.Fecha_Cierre, GETDATE())),
+    T.SLA_Compromiso_Horas,
+    T.Tiempo_Resolucion_Horas,
+    CASE 
+        WHEN T.Tiempo_Resolucion_Horas > T.SLA_Compromiso_Horas THEN 'VIOLACION_REINCIDENTE'
+        ELSE 'CUMPLIMIENTO_OPTIMO'
+    END,
+    CASE 
+        WHEN T.Tiempo_Resolucion_Horas > (T.SLA_Compromiso_Horas * 2) THEN 75000.00
+        WHEN T.Tiempo_Resolucion_Horas > T.SLA_Compromiso_Horas THEN 25000.00
+        ELSE 0.00
+    END,
+    'Inspector INDOTEL Lic. ' + (SELECT TOP 1 Nombre + ' ' + Apellido FROM #Nombres, #Apellidos ORDER BY NEWID()),
+    CASE 
+        WHEN T.Tiempo_Resolucion_Horas > T.SLA_Compromiso_Horas THEN 'En Proceso Sancionador'
+        ELSE 'Archivado Conforme'
+    END
+FROM Tickets_Averias T
+WHERE T.Tiempo_Resolucion_Horas > (T.SLA_Compromiso_Horas * 0.9) -- Auditar los críticos o que rozan límite
+  AND NOT EXISTS (SELECT 1 FROM Auditoria_Regulatoria_INDOTEL A WHERE A.ID_Ticket = T.ID_Ticket);
+
+-- Limpieza de temporales
+DROP TABLE #Nombres;
+DROP TABLE #Apellidos;
+DROP TABLE #Sectores;
+DROP TABLE #TiposAveria;
+
+PRINT '====================================================================================================';
+PRINT '>>> PIPELINE DE CARGA MASIVA FINALIZADO CON ÉXITO:';
+SELECT 'Clientes Totales' AS Entidad, COUNT(*) AS Total FROM Clientes
+UNION ALL
+SELECT 'Contratos Activos', COUNT(*) FROM Contratos
+UNION ALL
+SELECT 'Tickets de Incidencias', COUNT(*) FROM Tickets_Averias
+UNION ALL
+SELECT 'Expedientes INDOTEL', COUNT(*) FROM Auditoria_Regulatoria_INDOTEL;
+PRINT '====================================================================================================';
+GO
+</code></pre>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NUEVA SECCIÓN: LABORATORIO DE CONSULTAS (15 BÁSICAS + 15 AVANZADAS)
+    ========================================================================== -->
+    <section id="laboratorio-consultas" class="content-card">
+      <div class="mb-4 border-bottom border-2 border-dark pb-3">
+        <span class="badge bg-primary text-white border border-dark mb-2">📚 Laboratorio Práctico de Consultas</span>
+        <h2 class="h3 fw-bold mb-1" style="font-family: 'Space Grotesk', sans-serif;">
+          Guía Completa de Funciones y Consultas SQL (15 Básicas + 15 Avanzadas)
+        </h2>
+        <p class="text-secondary mb-0">
+          Domina individualmente cada técnica y función de proyección, filtrado, agregación y cálculo analítico de ventana aplicadas al modelo de telecomunicaciones.
+        </p>
+      </div>
+
+      <!-- Definiciones Teóricas Individuales -->
+      <h4 class="fw-bold mb-3 text-dark" style="font-family: 'Space Grotesk', sans-serif;">
+        <i class="bi bi-book-half text-danger"></i> Glosario de Funciones & Cláusulas Clave
+      </h4>
+      <div id="definiciones-sql-grid" class="row g-3 mb-5">
+        <!-- Renderizado dinámico desde queries-showcase.js -->
+      </div>
+
+      <!-- Barra de Filtros de Consultas -->
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 p-3 bg-light border border-2 border-dark rounded-3" style="box-shadow: 3px 3px 0 #000;">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <strong class="text-dark"><i class="bi bi-cpu-fill text-danger"></i> Motor SQL Activo:</strong>
+          <div class="btn-group border border-2 border-dark rounded-2 overflow-hidden shadow-sm" role="group">
+            <button type="button" class="btn btn-sm btn-dark motor-sync-btn active" data-motor="sqlserver" onclick="window.cambiarMotorGlobal('sqlserver')">SQL Server</button>
+            <button type="button" class="btn btn-sm btn-outline-dark motor-sync-btn" data-motor="postgres" onclick="window.cambiarMotorGlobal('postgres')">PostgreSQL</button>
+            <button type="button" class="btn btn-sm btn-outline-dark motor-sync-btn" data-motor="oracle" onclick="window.cambiarMotorGlobal('oracle')">Oracle</button>
+            <button type="button" class="btn btn-sm btn-outline-dark motor-sync-btn" data-motor="mysql" onclick="window.cambiarMotorGlobal('mysql')">MySQL</button>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <strong class="text-dark"><i class="bi bi-funnel-fill text-primary"></i> Filtrar:</strong>
+          <div class="btn-group border border-2 border-dark rounded-2 overflow-hidden shadow-sm" role="group">
+            <button type="button" class="btn btn-sm btn-dark fw-bold" onclick="renderizarConsultas('todas')">Todas (30)</button>
+            <button type="button" class="btn btn-sm btn-outline-dark fw-bold" onclick="renderizarConsultas('basicas')">15 Básicas</button>
+            <button type="button" class="btn btn-sm btn-outline-dark fw-bold" onclick="renderizarConsultas('avanzadas')">15 Avanzadas</button>
+          </div>
+          <button class="btn btn-sm btn-danger fw-bold border-2 border-dark d-flex align-items-center gap-1 ms-lg-2" onclick="descargarScriptTodoEnUno(window.motorActivo)">
+            <i class="bi bi-cloud-arrow-down-fill"></i> Descargar Todo-en-Uno
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista de 30 Consultas Comentadas -->
+      <div id="consultas-sql-container">
+        <!-- Renderizado dinámico desde queries-showcase.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NUEVA SECCIÓN: SIMULADOR DE EXAMEN TÉCNICO (30 PREGUNTAS / TIMER 30M)
+    ========================================================================== -->
+    <section id="seccion-quiz" class="content-card">
+      <div class="mb-4 border-bottom border-2 border-dark pb-3">
+        <span class="badge bg-danger text-white border border-dark mb-2">⚡ Evaluación Técnica Oficial</span>
+        <h2 class="h3 fw-bold mb-1" style="font-family: 'Space Grotesk', sans-serif;">
+          Simulador de Examen Técnico Multi-Motor (30 Preguntas | 30 Minutos)
+        </h2>
+        <p class="text-secondary mb-0">
+          Demuestra tus competencias prácticas en bases de datos relacionales, sintaxis SQL multi-motor, funciones analíticas y fiscalización regulatoria. Responde las 30 preguntas dentro de la ventana de 30 minutos. Selecciona tu respuesta para recibir retroalimentación técnica instantánea y al finalizar podrás generar tu reporte de notas y solicitar tu certificado oficial.
+        </p>
+      </div>
+
+      <!-- Tarjeta Introductoria antes de iniciar -->
+      <div id="quiz-intro-card" class="p-4 bg-light border border-2 border-dark rounded-3 text-center mb-4" style="box-shadow: 4px 4px 0 #000;">
+        <i class="bi bi-mortarboard-fill display-4 text-danger mb-3 d-inline-block"></i>
+        <h4 class="fw-bold text-dark mb-2">¿Estás Listo para Poner a Prueba tus Habilidades?</h4>
+        <p class="text-secondary mx-auto mb-4" style="max-width: 650px;">
+          El examen evalúa tus conocimientos sobre diseño DDL/DML, Joins relacionales, propiedades ACID, funciones de ventana analíticas, optimización de índices y auditoría técnica de telecomunicaciones. Dispones de un temporizador regresivo de <strong>30 minutos</strong> para responder las 30 preguntas. Cada opción seleccionada te proporcionará retroalimentación técnica inmediata.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+          <button id="btn-iniciar-quiz" class="btn btn-claro btn-lg px-4 d-flex align-items-center gap-2">
+            <i class="bi bi-play-circle-fill"></i> Iniciar Prueba Técnica Ahora
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta Activa del Examen en Curso -->
+      <div id="quiz-active-card" class="d-none">
+        <!-- Cabecera de Métricas del Examen -->
+        <div class="row g-3 align-items-center mb-4">
+          <div class="col-md-3">
+            <div id="quiz-timer-display" class="quiz-timer-badge text-center">
+              <i class="bi bi-stopwatch"></i> 30:00
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+              <div class="metric-box-quiz">
+                <span class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> Buenas:</span> 
+                <strong id="quiz-metric-buenas" class="ms-1 text-success fs-5">0</strong>
+              </div>
+              <div class="metric-box-quiz">
+                <span class="text-danger fw-bold"><i class="bi bi-x-circle-fill"></i> Malas:</span> 
+                <strong id="quiz-metric-malas" class="ms-1 text-danger fs-5">0</strong>
+              </div>
+              <div class="metric-box-quiz">
+                <span class="text-secondary fw-bold"><i class="bi bi-hourglass-split"></i> Restantes:</span> 
+                <strong id="quiz-metric-restantes" class="ms-1 text-dark fs-5">30</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Progreso del Examen -->
+        <div class="progress mb-4 border border-2 border-dark" style="height: 12px; border-radius: 6px;">
+          <div id="quiz-progreso-preguntas" class="progress-bar bg-danger" role="progressbar" style="width: 0%;"></div>
+        </div>
+
+        <!-- Tarjeta de la Pregunta Corriente -->
+        <div class="p-4 bg-white border border-2 border-dark rounded-3 mb-4" style="box-shadow: 5px 5px 0 #000;">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span id="quiz-pregunta-numero" class="badge bg-dark text-white border border-dark fs-6">Pregunta 1 de 30</span>
+            <span id="quiz-pregunta-categoria" class="badge bg-warning text-dark border border-dark">Categoría</span>
+          </div>
+          <h5 id="quiz-pregunta-texto" class="fw-bold text-dark mb-4" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem;">
+            Cargando pregunta...
+          </h5>
+
+          <!-- Contenedor de Opciones -->
+          <div id="quiz-opciones-container">
+            <!-- Renderizado dinámico desde quiz-engine.js -->
+          </div>
+
+          <!-- Caja de Feedback Formativo -->
+          <div id="quiz-feedback-explicacion" class="d-none"></div>
+        </div>
+
+        <!-- Botones de Navegación del Examen -->
+        <div class="d-flex justify-content-between align-items-center">
+          <button id="btn-quiz-anterior" class="btn btn-outline-dark border-2 fw-bold d-flex align-items-center gap-1" disabled>
+            <i class="bi bi-arrow-left"></i> Anterior
+          </button>
+          <div>
+            <button id="btn-quiz-siguiente" class="btn btn-dark border-2 fw-bold d-flex align-items-center gap-1">
+              Siguiente <i class="bi bi-arrow-right"></i>
+            </button>
+            <button id="btn-quiz-finalizar" class="btn btn-danger border-2 fw-bold d-none d-flex align-items-center gap-1">
+              <i class="bi bi-check-circle-fill"></i> Finalizar Examen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Reporte de Notas al Finalizar -->
+      <div id="quiz-result-card" class="d-none p-4 bg-light border border-2 border-dark rounded-3 mb-4" style="box-shadow: 6px 6px 0 #000;">
+        <div class="text-center mb-4">
+          <div id="result-badge-aprobacion" class="mb-3"></div>
+          <h2 class="display-5 fw-bold text-dark mb-1" style="font-family: 'Space Grotesk', sans-serif;">
+            Reporte Oficial de Calificación
+          </h2>
+          <p class="text-secondary">Resultados obtenidos en la evaluación técnica de bases de datos relacionales.</p>
+        </div>
+
+        <div class="row g-3 text-center mb-4">
+          <div class="col-md-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3" style="box-shadow: 3px 3px 0 #000;">
+              <small class="text-muted fw-bold d-block">Puntaje Final</small>
+              <span id="result-score-number" class="display-6 fw-bold text-danger">0/100</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3" style="box-shadow: 3px 3px 0 #000;">
+              <small class="text-muted fw-bold d-block">Respuestas Buenas</small>
+              <span id="result-score-buenas" class="display-6 fw-bold text-success">0</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3" style="box-shadow: 3px 3px 0 #000;">
+              <small class="text-muted fw-bold d-block">Respuestas Malas</small>
+              <span id="result-score-malas" class="display-6 fw-bold text-danger">0</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white border border-2 border-dark rounded-3" style="box-shadow: 3px 3px 0 #000;">
+              <small class="text-muted fw-bold d-block">Tiempo Empleado</small>
+              <span id="result-score-tiempo" class="display-6 fw-bold text-dark" style="font-size: 1.8rem;">0m 0s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+          <button id="btn-reiniciar-quiz" class="btn btn-outline-dark border-2 fw-bold d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-clockwise"></i> Tomar Otro Intento (Nuevas Preguntas)
+          </button>
+          <a href="#modulo-certificado-oficial" class="btn btn-claro fw-bold d-flex align-items-center gap-2">
+            <i class="bi bi-award-fill"></i> Solicitar y Descargar Certificado
+          </a>
+        </div>
+
+        <!-- Módulo de Repaso Detallado de Preguntas -->
+        <div class="border-top border-2 border-dark pt-4">
+          <h4 class="fw-bold mb-3 text-dark" style="font-family: 'Space Grotesk', sans-serif;">
+            <i class="bi bi-search text-primary"></i> Desglose Detallado de Respuestas para Repaso
+          </h4>
+          <div id="quiz-repaso-preguntas-lista">
+            <!-- Renderizado dinámico desde quiz-engine.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de Histórico de Exámenes Tomados -->
+      <div class="mt-5 border-top border-2 border-dark pt-4">
+        <h4 class="fw-bold mb-3 text-dark" style="font-family: 'Space Grotesk', sans-serif;">
+          <i class="bi bi-clock-history text-danger"></i> Historial de Intentos Guardados (LocalStorage)
+        </h4>
+        <div class="table-responsive">
+          <table class="table table-bordered border-dark table-hover mb-0 text-center align-middle" style="background: #FFFFFF;">
+            <thead class="table-dark text-white">
+              <tr>
+                <th># Intento</th>
+                <th>Fecha y Hora</th>
+                <th>Calificación</th>
+                <th>Buenas</th>
+                <th>Malas</th>
+                <th>Tiempo Utilizado</th>
+              </tr>
+            </thead>
+            <tbody id="quiz-historial-tbody">
+              <!-- Renderizado dinámico desde quiz-engine.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NUEVA SECCIÓN: GENERADOR DE CERTIFICADO OFICIAL ESTÁNDAR
+    ========================================================================== -->
+    <section id="modulo-certificado-oficial" class="content-card">
+      <div class="mb-4 border-bottom border-2 border-dark pb-3">
+        <span class="badge bg-success text-white border border-dark mb-2">🎓 Acreditación & Certificación</span>
+        <h2 class="h3 fw-bold mb-1" style="font-family: 'Space Grotesk', sans-serif;">
+          Emisión de Certificado Oficial Estándar de Competencia Multi-Motor
+        </h2>
+        <p class="text-secondary mb-0">
+          Completa tus datos de acreditación para generar tu certificado digital con los logos oficiales de los 4 motores líderes, código criptográfico de verificación, métricas de rendimiento y la firma autorizada del <strong>Ing. Juancito Peña</strong>.
+        </p>
+      </div>
+
+      <!-- Formulario de Participante -->
+      <div class="p-4 bg-light border border-2 border-dark rounded-3 mb-5" style="box-shadow: 4px 4px 0 #000;">
+        <h5 class="fw-bold text-dark mb-3">Datos del Participante para la Emisión</h5>
+        <form id="form-generar-certificado" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-dark">Nombres</label>
+            <input type="text" id="cert-input-nombre" class="form-control border-2 border-dark" placeholder="Ejemplo: Juan Alberto" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-dark">Apellidos</label>
+            <input type="text" id="cert-input-apellido" class="form-control border-2 border-dark" placeholder="Ejemplo: Pérez Martínez" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-dark">Correo Electrónico Profesional</label>
+            <input type="email" id="cert-input-email" class="form-control border-2 border-dark" placeholder="Ejemplo: juan.perez@empresa.com" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-dark">País de Residencia</label>
+            <input type="text" id="cert-input-pais" class="form-control border-2 border-dark" placeholder="Ejemplo: República Dominicana" required>
+          </div>
+          <div class="col-12 text-end mt-4">
+            <button type="submit" class="btn btn-claro fw-bold px-4 py-2 d-inline-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill"></i> Generar Certificado Oficial Ahora
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Contenedor del Certificado Generado -->
+      <div id="contenedor-certificado-final" class="d-none">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+          <h4 class="fw-bold text-dark mb-0">Vista Previa de Acreditación Oficial</h4>
+          <div class="d-flex gap-2">
+            <button id="btn-descargar-cert-pdf" class="btn btn-danger fw-bold border-2 border-dark d-flex align-items-center gap-2">
+              <i class="bi bi-file-earmark-pdf-fill"></i> Descargar en PDF
+            </button>
+            <button id="btn-descargar-cert-png" class="btn btn-dark fw-bold border-2 border-dark d-flex align-items-center gap-2">
+              <i class="bi bi-file-earmark-image-fill"></i> Descargar Imagen PNG
+            </button>
+          </div>
+        </div>
+
+        <!-- DOCUMENTO DEL CERTIFICADO PARA IMPRESIÓN Y RENDER -->
+        <div id="plantilla-certificado-documento" class="certificate-document-wrapper">
+          <div class="certificate-watermark">DATA & AI ARCHITECT</div>
+          <div class="certificate-inner-border">
+            
+                        <!-- Barra Superior Ceremonial: Logo DataIADev & Logos Multi-Motor -->
+            <div class="certificate-engines-bar">
+              <div class="certificate-sponsor-logo">
+                <img src="assets/LOGO_DATAIADEV.png" alt="DataIADev.com" class="cert-dataiadev-logo" />
+              </div>
+              <div class="certificate-engines-group">
+                <div class="engine-logo-item">
+                  <i class="bi bi-database-fill text-danger fs-5"></i> Microsoft SQL Server
+                </div>
+                <div class="engine-logo-item">
+                  <i class="bi bi-hdd-network-fill text-primary fs-5"></i> PostgreSQL
+                </div>
+                <div class="engine-logo-item">
+                  <i class="bi bi-server text-danger fs-5"></i> Oracle Database
+                </div>
+                <div class="engine-logo-item">
+                  <i class="bi bi-cpu-fill text-info fs-5"></i> MySQL InnoDB
+                </div>
+              </div>
+            </div>
+
+            <!-- Título del Certificado -->
+            <div class="text-center my-3">
+              <span class="badge bg-danger text-white border border-dark px-3 py-1 mb-2">CERTIFICACIÓN PROFESIONAL INTERNACIONAL</span>
+              <h1 class="certificate-main-title mb-2">Certificado de Excelencia Técnica</h1>
+              <p class="text-secondary text-uppercase fw-bold mb-3" style="letter-spacing: 1px; font-size: 0.95rem;">
+                En Arquitectura de Bases de Datos Relacionales, SQL Multi-Motor & Auditoría INDOTEL
+              </p>
+              
+              <p class="text-muted mb-2">Se otorga la presente acreditación de alto nivel a:</p>
+              <h2 id="cert-render-nombre" class="certificate-recipient-name mb-3">NOMBRE DEL PARTICIPANTE</h2>
+              
+              <p class="mx-auto text-dark" style="max-width: 820px; line-height: 1.6; font-size: 1.05rem;">
+                Por haber completado y aprobado satisfactoriamente la evaluación técnica integral sobre <strong>Pipeline Lógico Multi-Motor</strong>, optimización de consultas, funciones de ventana analíticas, índices sargables, propiedades transaccionales <strong>ACID</strong> y fiscalización regulatoria de telecomunicaciones conforme a la normativa <strong>INDOTEL</strong>.
+              </p>
+            </div>
+
+            <!-- Métricas Obtenidas Incrustadas -->
+            <div class="certificate-metrics-grid">
+              <div class="row text-center align-items-center">
+                <div class="col-3 border-end border-2 border-dark">
+                  <small class="text-muted fw-bold d-block">Calificación</small>
+                  <strong id="cert-render-calificacion" class="fs-4 text-danger fw-bold">95%</strong>
+                </div>
+                <div class="col-3 border-end border-2 border-dark">
+                  <small class="text-muted fw-bold d-block">Aciertos</small>
+                  <strong id="cert-render-aciertos" class="fs-4 text-success fw-bold">28 de 30</strong>
+                </div>
+                <div class="col-3 border-end border-2 border-dark">
+                  <small class="text-muted fw-bold d-block">Tiempo</small>
+                  <strong id="cert-render-tiempo" class="fs-5 text-dark fw-bold">18m 42s</strong>
+                </div>
+                <div class="col-3">
+                  <small class="text-muted fw-bold d-block">País / Emisión</small>
+                  <strong id="cert-render-pais" class="fs-6 text-dark fw-bold">Rep. Dominicana</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie del Certificado: Firma y Medalla Holográfica -->
+            <div class="d-flex justify-content-between align-items-end mt-4 pt-2">
+              
+              <!-- Firma Simulada con Lapicero Azul de Juancito Peña -->
+              <div class="text-start ps-2">
+                <div class="certificate-signature-blue">Ing. Juancito Peña</div>
+                <div style="border-top: 2px solid #000000; width: 260px; margin-top: -6px; margin-bottom: 4px;"></div>
+                <div class="fw-bold text-dark" style="font-size: 0.95rem;">Ing. Juancito Peña</div>
+                <div class="text-muted" style="font-size: 0.8rem;">CEO & Founder - DataIADev.com | Arquitecto Digital</div>
+                <div class="text-muted" style="font-size: 0.75rem;">Santo Domingo, República Dominicana</div>
+              </div>
+
+              <!-- Metadatos de Validación Criptográfica -->
+              <div class="text-center small">
+                <div class="badge bg-light text-dark border border-dark mb-1">ID Criptográfico de Validación</div>
+                <div id="cert-render-hash" class="font-monospace fw-bold text-dark">CERT-JPV-2026-X89F2A</div>
+                <div id="cert-render-fecha" class="text-muted" style="font-size: 0.75rem;">Fecha de Emisión: 28 de Octubre, 2026</div>
+                <div id="cert-render-email" class="text-muted" style="font-size: 0.75rem;">acreditacion@dataiadev.com</div>
+              </div>
+
+              <!-- Medalla Oficial Premium -->
+              <div class="text-end pe-2">
+                <img src="assets/certificado_premium.webp" alt="Sello de Excelencia Premium" class="certificate-seal-img" />
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NUEVA SECCIÓN: 10 CONSEJOS DE MAESTRÍA PARA SEGUIR MEJORANDO
+    ========================================================================== -->
+    <section id="consejos-maestria" class="content-card">
+      <div class="mb-4 border-bottom border-2 border-dark pb-3">
+        <span class="badge bg-dark text-white border border-dark mb-2">💡 Nivel Senior de Ingeniería</span>
+        <h2 class="h3 fw-bold mb-1" style="font-family: 'Space Grotesk', sans-serif;">
+          ¡Llegaste al Final! 10 Consejos de Maestría para Seguir Mejorando
+        </h2>
+        <p class="text-secondary mb-0">
+          Principios innegociables aplicados en arquitecturas de datos de misión crítica, telecomunicaciones y entornos analíticos de alta escala.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        
+        <!-- Tip 1 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🎯 1. Domina la <span class="keyword-highlight-blue">Sargabilidad</span> en cada WHERE
+            </h5>
+            <p class="small text-secondary mb-0">
+              Nunca apliques <em>funciones matemáticas o de fecha</em> directamente sobre columnas indexadas (ej. <code>WHERE YEAR(Fecha) = 2026</code>). Esto destruye los <strong>Index Seeks</strong> y fuerza costosos <strong>Table Scans</strong>. Reescribe siempre tus predicados como rangos semi-abiertos: <code>WHERE Fecha >= '2026-01-01' AND Fecha &lt; '2027-01-01'</code>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 2 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🛡️ 2. Diseña <span class="keyword-highlight-green">Covering Indexes</span> con Cláusula INCLUDE
+            </h5>
+            <p class="small text-secondary mb-0">
+              Evita los destructivos <em>Key Lookups</em> almacenando las columnas complementarias de proyección en la cláusula <strong>INCLUDE</strong> del índice no agrupado. De esta manera, el motor satisface la consulta completa desde las hojas del árbol B sin tocar el disco de la tabla base.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 3 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🔬 3. Inspecciona los <span class="keyword-highlight-red">Planes de Ejecución Reales</span>
+            </h5>
+            <p class="small text-secondary mb-0">
+              No asumas cómo piensa el optimizador: <em>comprueba el plan gráfico</em>. Identifica advertencias en amarillo, derrames de memoria hacia <strong>Tempdb Spills</strong>, operadores de <strong>Hash Match</strong> desproporcionados y discrepancias entre <em>Estimated Rows</em> y <em>Actual Rows</em> causadas por estadísticas desactualizadas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 4 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              ⚖️ 4. Normaliza para <span class="keyword-highlight-purple">OLTP</span> y Desnormaliza para <span class="keyword-highlight-blue">OLAP</span>
+            </h5>
+            <p class="small text-secondary mb-0">
+              Respeta la <strong>Tercera Forma Normal (3NF)</strong> en sistemas transaccionales para erradicar anomalías de actualización. En capas analíticas y almacenes de datos (Data Warehouse), modela esquemas en estrella <em>(Star Schema Kimball)</em> con tablas de hechos y dimensiones para acelerar agregaciones masivas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 5 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              ⚡ 5. Controla el <span class="keyword-highlight-red">Aislamiento Transaccional & Deadlocks</span>
+            </h5>
+            <p class="small text-secondary mb-0">
+              Mantén las transacciones explícitas lo más <em>cortas y atómicas</em> posible. Conoce la diferencia entre <strong>READ COMMITTED SNAPSHOT (RCSI)</strong> y bloqueos pesados compartidos para que los lectores no congelen a los escritores en sistemas concurrentes de telecomunicaciones.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 6 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🔄 6. Aprovecha el <span class="keyword-highlight-green">Query Folding</span> en Capas de BI
+            </h5>
+            <p class="small text-secondary mb-0">
+              Si integras tus datos con <em>Power BI</em> o herramientas analíticas, asegura que tus transformaciones se traduzcan en <strong>SQL Nativo</strong> para que el servidor de base de datos realice el trabajo pesado aprovechando sus índices y memoria en lugar de saturar la red local.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 7 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              💾 7. Monitorea y Cuida el Desempeño de <span class="keyword-highlight-purple">Tempdb</span>
+            </h5>
+            <p class="small text-secondary mb-0">
+              Tablas temporales, variables de tabla, agrupaciones hash y ordenamientos masivos compiten por el mismo recurso compartido. Configura múltiples archivos de datos de igual tamaño para <strong>Tempdb</strong> y minimiza el uso de tablas temporales innecesarias mediante <strong>CTEs modulares</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 8 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🗂️ 8. Implementa <span class="keyword-highlight-blue">Particionamiento de Tablas</span> en Auditoría
+            </h5>
+            <p class="small text-secondary mb-0">
+              Cuando las tablas de auditoría superen los <em>10 millones de registros</em>, implementa <strong>Table Partitioning</strong> por fecha. Esto acelera el archivado histórico, permite eliminar datos obsoletos mediante <code>SWITCH PARTITION</code> en milisegundos y optimiza el I/O.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 9 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🔒 9. Seguridad Nivel Cero Confianza (<span class="keyword-highlight-red">Zero Trust</span>)
+            </h5>
+            <p class="small text-secondary mb-0">
+              Aplica el principio de <em>Menor Privilegio (PoLP)</em>. Jamás utilices la cuenta <code>sa</code> o <code>root</code> en cadenas de conexión de aplicaciones. Habilita <strong>Always Encrypted</strong>, enmascaramiento dinámico (DDM) y auditoría inmutable de accesos para cumplir estándares bancarios y regulatorios.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tip 10 -->
+        <div class="col-md-6">
+          <div class="tip-card-pro">
+            <h5 class="fw-bold text-dark mb-2">
+              🚀 10. La IA es tu Acelerador, no tu <span class="keyword-highlight-green">Reemplazo Intelectual</span>
+            </h5>
+            <p class="small text-secondary mb-0">
+              Usa herramientas de Inteligencia Artificial para prototipar y generar scaffolding, pero <strong>audita cada línea de código</strong>. La verdadera ventaja competitiva radica en tu capacidad de entender la arquitectura profunda, resolver incidentes bajo presión y liderar proyectos con rigor.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NUEVA SECCIÓN: TERMINAL MATRIX - MANIFIESTO MOTIVACIONAL DE NUEVA ERA
+    ========================================================================== -->
+    
+    <!-- =========================================================================
+         SECCIÓN: DESCARGAS OFICIALES DE SCRIPTS (BASE & MASTER TODO-EN-UNO)
+    ========================================================================== -->
+    <section id="descargas" class="mb-5">
+      <div class="p-5 bg-white border border-2 border-dark rounded-4 shadow-sm text-center" style="box-shadow: 6px 6px 0 #000;">
+        <span class="badge-soft-red mb-3 d-inline-block">💾 Archivos Listos para tu Entorno</span>
+        <h2 class="h2 fw-bold mb-3" style="font-family: 'Space Grotesk', sans-serif;">Descarga los Scripts Ejecutables</h2>
+        <p class="mb-4">Guarda el script de tu motor favorito y ejecútalo directamente en SSMS, pgAdmin, SQL Developer o MySQL Workbench:</p>
+
+        <!-- Scripts Base Individuales -->
+        <div class="mb-4">
+          <small class="fw-bold text-muted text-uppercase d-block mb-2">① Scripts Base DDL/DML por Motor:</small>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button class="btn btn-outline-dark border-2 fw-bold d-flex align-items-center gap-2" onclick="descargarScriptEspecifico('sqlserver')">
+              <i class="bi bi-download text-danger"></i> SQL Server (.sql)
+            </button>
+            <button class="btn btn-outline-dark border-2 fw-bold d-flex align-items-center gap-2" onclick="descargarScriptEspecifico('postgres')">
+              <i class="bi bi-download text-primary"></i> PostgreSQL (.sql)
+            </button>
+            <button class="btn btn-outline-dark border-2 fw-bold d-flex align-items-center gap-2" onclick="descargarScriptEspecifico('oracle')">
+              <i class="bi bi-download text-danger"></i> Oracle (.sql)
+            </button>
+            <button class="btn btn-outline-dark border-2 fw-bold d-flex align-items-center gap-2" onclick="descargarScriptEspecifico('mysql')">
+              <i class="bi bi-download text-info"></i> MySQL (.sql)
+            </button>
+          </div>
+        </div>
+
+        <!-- Scripts Maestros Todo-en-Uno (Master All-In-One) -->
+        <div class="p-4 bg-light border border-2 border-dark rounded-3 mx-auto" style="max-width: 860px; box-shadow: 4px 4px 0 #000;">
+          <span class="badge bg-danger text-white border border-dark mb-2">⚡ Recomendado para Práctica Integral</span>
+          <h4 class="fw-bold text-dark mb-2" style="font-family: 'Space Grotesk', sans-serif;">Scripts Maestros 100% Completos (Todo-en-Uno)</h4>
+          <p class="small text-secondary mb-3">Incluye en un solo archivo: <strong>DDL de Tablas + Vistas INDOTEL + Carga Masiva (1,000 Tickets) + Las 30 Consultas</strong> listas para correr:</p>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button class="btn btn-claro btn-sm d-flex align-items-center gap-2" onclick="descargarScriptTodoEnUno('sqlserver')">
+              <i class="bi bi-file-earmark-code-fill"></i> Todo-en-Uno SQL Server
+            </button>
+            <button class="btn btn-primary btn-sm border-2 border-dark fw-bold d-flex align-items-center gap-2 text-white" onclick="descargarScriptTodoEnUno('postgres')">
+              <i class="bi bi-file-earmark-code-fill"></i> Todo-en-Uno PostgreSQL
+            </button>
+            <button class="btn btn-danger btn-sm border-2 border-dark fw-bold d-flex align-items-center gap-2 text-white" onclick="descargarScriptTodoEnUno('oracle')">
+              <i class="bi bi-file-earmark-code-fill"></i> Todo-en-Uno Oracle
+            </button>
+            <button class="btn btn-warning btn-sm border-2 border-dark fw-bold d-flex align-items-center gap-2 text-dark" onclick="descargarScriptTodoEnUno('mysql')">
+              <i class="bi bi-file-earmark-code-fill"></i> Todo-en-Uno MySQL
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="seccion-manifiesto-matrix" class="matrix-terminal-section">
+      <!-- Lienzo Canvas de Lluvia Digital Matrix -->
+      <canvas id="matrix-rain-canvas"></canvas>
+
+      <div class="matrix-terminal-content">
+        <!-- Barra de Ventana Terminal -->
+        <div class="matrix-terminal-header">
+          <div class="matrix-terminal-dots">
+            <span class="matrix-terminal-dot dot-red"></span>
+            <span class="matrix-terminal-dot dot-yellow"></span>
+            <span class="matrix-terminal-dot dot-green"></span>
+          </div>
+          <div class="font-monospace small text-success fw-bold">
+            <i class="bi bi-cpu me-1"></i> PROTOCOLO DE TRANSMISIÓN NEURAL | DATA & AI LEADERSHIP 2026
+          </div>
+          <div class="badge bg-success text-dark font-monospace fw-bold">ONLINE</div>
+        </div>
+
+        <!-- Bloque de Texto Mecanografiado -->
+        <div class="matrix-typed-box">
+          <span id="matrix-typed-text"></span><span class="matrix-cursor"></span>
+        </div>
+      </div>
+    </section>
+
+<!-- =========================================================================
+     SECCIÓN: BIOGRAFÍA PROFESIONAL, FILOSOFÍA & STACK TECNOLÓGICO
+========================================================================== -->
+<section class="mb-5">
+  <div class="footer-profile-card">
+    <div class="row g-4 align-items-center">
+      
+      <!-- LATERAL IZQUIERDO: ADN PROFESIONAL, FILOSOFÍA Y DOCENCIA (SIN REPETIR LOGOS) -->
+      <div class="col-lg-7">
+        
+        <!-- Encabezado con Foto y Badges de Rol -->
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <img 
+            src="https://avatars.githubusercontent.com/u/38921558?v=4" 
+            alt="Ing. Juancito Peña Vizcaíno" 
+            style="width: 86px; height: 86px; object-fit: cover; border-radius: 50%; border: 2.5px solid #000000; box-shadow: 3px 3px 0px #000000; flex-shrink: 0;"
+          >
+          <div>
+            <h4 class="fw-bold mb-1">Ing. Juancito Peña Vizcaíno</h4>
+            <div class="d-flex flex-wrap gap-1">
+              <span class="badge bg-dark text-white">Data Analyst</span>
+              <span class="badge bg-danger text-white">Full Stack Dev</span>
+              <span class="badge bg-primary text-white">AI &amp; API Expert</span>
+              <span class="badge bg-warning text-dark">Líder I+D+i</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- PÁRRAFO 1: Trayectoria, Formación y Foco en I+D+i -->
+        <p class="mb-3">
+          <strong>Ingeniero en Sistemas y Computación</strong> con Postgrado en <strong>Ingeniería de Software</strong> y Maestría en <strong>Sistemas Mención Gerencial</strong> (<em>Universidad Dominicana O&amp;M</em>). Con más de <strong>15 años de trayectoria</strong>, transformo problemas de alta complejidad en soluciones escalables. Durante el último año, he centrado mi trabajo en <strong>I+D+i (Investigación, Desarrollo e Innovación)</strong>, explorando arquitecturas de <strong>IA Generativa (RAG / LLMs)</strong>, integración de agentes autónomos con bases de datos y orquestación de APIs empresariales.
+        </p>
+
+        <!-- PÁRRAFO 2: ADN Técnico, Pasión por los Casos de Uso y Docencia Práctica -->
+        <p class="mb-0">
+          🔬 <strong>Mi motor es el aprendizaje a través de los retos:</strong> me apasionan los <em>casos de uso reales</em>, las <strong>pruebas técnicas rigurosas</strong>, la investigación profunda y el diseño de soluciones directas a problemas de ingeniería. 🎓 Como <strong>docente universitario</strong> y creador del canal educativo <strong>@JuancitoDevV</strong>, comparto este conocimiento práctico mediante ejercicios y proyectos de código abierto para acercar la tecnología a problemas reales. 🚀
+        </p>
+
+      </div>
+
+      <!-- LATERAL DERECHO: STACK VISUAL AGRUPADO & CONTACTO DIRECTO -->
+      <div class="col-lg-5">
+        
+        <div class="mb-4">
+          <h6 class="fw-bold mb-2 text-dark">
+            <i class="bi bi-stack text-danger me-1"></i> Ecosistema de Tecnologías:
+          </h6>
+
+          <!-- 1. Frontend -->
+          <div class="mb-2">
+            <small class="d-block fw-bold text-dark" style="font-size: 0.78rem;">🖥️ Frontend &amp; Web:</small>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"> HTML5</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"> CSS3</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"> JavaScript</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"> React</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"> Next.js</span>
+          </div>
+
+          <!-- 2. Backend & Móvil -->
+          <div class="mb-2">
+            <small class="d-block fw-bold text-dark" style="font-size: 0.78rem;">⚙️ Backend &amp; Multiplataforma:</small>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"> C#</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt=".NET"> .NET / MAUI</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"> PHP</span>
+          </div>
+
+          <!-- 3. Datos & Analítica -->
+          <div class="mb-2">
+            <small class="d-block fw-bold text-dark" style="font-size: 0.78rem;">📊 Data Analytics &amp; Bases de Datos:</small>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server"> SQL Server</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"> PostgreSQL</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"> MySQL</span>
+            <span class="tech-pill"><i class="bi bi-bar-chart-fill text-warning fs-6"></i> Power BI / DAX</span>
+          </div>
+
+          <!-- 4. IA, APIs & Despliegue -->
+          <div class="mb-0">
+            <small class="d-block fw-bold text-dark" style="font-size: 0.78rem;">🤖 IA + APIs &amp; Despliegue (I+D+i):</small>
+            <span class="tech-pill"><i class="bi bi-plug-fill text-primary fs-6"></i> APIs REST</span>
+            <span class="tech-pill"><i class="bi bi-cpu-fill text-danger fs-6"></i> IA + LLMs (RAG)</span>
+            <span class="tech-pill"><i class="bi bi-robot text-success fs-6"></i> Agentes IA</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"> Git</span>
+            <span class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"> GitHub</span>
+            <span class="tech-pill"><i class="bi bi-triangle-fill text-dark" style="font-size: 0.75rem;"></i> Vercel</span>
+          </div>
+        </div>
+
+        <!-- Enlaces a Redes Oficiales -->
+        <div class="text-lg-end">
+          <h6 class="fw-bold mb-2">Canales Oficiales &amp; Redes:</h6>
+          
+          <div class="d-flex gap-2 justify-content-lg-end flex-wrap mb-3">
+            <a href="https://www.linkedin.com/in/juancitope%C3%B1a/" target="_blank" class="social-btn" title="LinkedIn Oficial" rel="noopener noreferrer">
+              <i class="bi bi-linkedin"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@JuancitoDevV" target="_blank" class="social-btn" title="YouTube @JuancitoDevV" rel="noopener noreferrer">
+              <i class="bi bi-youtube text-danger"></i>
+            </a>
+
+            <a href="https://github.com/JUANCITOPENA" target="_blank" class="social-btn" title="GitHub @JUANCITOPENA" rel="noopener noreferrer">
+              <i class="bi bi-github"></i>
+            </a>
+
+            <a href="https://twitter.com/JuancitoPenaV" target="_blank" class="social-btn" title="X (Twitter) @JuancitoPenaV" rel="noopener noreferrer">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+
+            <a href="mailto:juancito.pena@gmail.com" class="social-btn" title="Correo Electrónico">
+              <i class="bi bi-envelope-at-fill"></i>
+            </a>
+          </div>
+
+          <!-- Tarjeta Directa de YouTube -->
+          <div class="p-2 bg-white border border-2 border-dark rounded-3 d-inline-block text-start shadow-sm w-100">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-play-circle-fill text-danger fs-2"></i>
+              <div>
+                <small class="d-block fw-bold text-danger">Canal Educativo de YouTube:</small>
+                <a href="https://www.youtube.com/@JuancitoDevV" target="_blank" class="fw-bold text-dark text-decoration-none" rel="noopener noreferrer">
+                  @JuancitoDevV · Algoritmos, SQL, IA &amp; .NET <i class="bi bi-box-arrow-up-right small"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+</section>
+
+  </div> <!-- FIN CONTAINER 75% -->
+
+  <!-- =========================================================================
+       FOOTER OFICIAL
+  ========================================================================== -->
+  <footer>
+    <div class="container-fluid px-4 px-lg-5">
+      <div class="row align-items-center g-3">
+        <div class="col-md-6">
+          <span class="navbar-brand-badge me-2">CLARO DOMINICANA</span>
+          <strong>Data Architecture &amp; Analytics Operations</strong>
+          <p class="small mb-0 mt-1">Plataforma de ingeniería de datos para NOC, CRM y fiscalización ante el INDOTEL.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="#inicio" class="text-danger fw-bold text-decoration-none">
+            <i class="bi bi-arrow-up-circle-fill"></i> Volver al Inicio
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts Base: Bootstrap & Prism -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
+  <!-- Scripts Modulares Desacoplados (Clean Architecture JS) -->
+  <script src="js/main.js"></script>
+  <script src="js/massive-insert.js"></script>
+  <script src="js/queries-showcase.js"></script>
+  <script src="js/questions-bank.js"></script>
+  <script src="js/quiz-engine.js"></script>
+  <script src="js/certificate.js"></script>
+  <script src="js/matrix-terminal.js"></script>
+</body>
+</html>
